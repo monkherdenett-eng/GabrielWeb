@@ -127,6 +127,60 @@
         </div>
     </div>
 
+    <!-- Countdown timer -->
+    <div class="py-8 bg-steel-900/80 backdrop-blur-sm border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm mb-3 uppercase tracking-widest">Семинар болох хүртэл</p>
+            <div class="flex justify-center gap-4 sm:gap-8">
+                <div class="text-center">
+                    <div id="cd-days" class="text-4xl sm:text-5xl font-extrabold text-white tabular-nums">00</div>
+                    <p class="text-gray-500 text-xs mt-1 uppercase tracking-wider">Өдөр</p>
+                </div>
+                <div class="text-4xl sm:text-5xl font-extrabold text-neon-500 leading-none">:</div>
+                <div class="text-center">
+                    <div id="cd-hours" class="text-4xl sm:text-5xl font-extrabold text-white tabular-nums">00</div>
+                    <p class="text-gray-500 text-xs mt-1 uppercase tracking-wider">Цаг</p>
+                </div>
+                <div class="text-4xl sm:text-5xl font-extrabold text-neon-500 leading-none">:</div>
+                <div class="text-center">
+                    <div id="cd-mins" class="text-4xl sm:text-5xl font-extrabold text-white tabular-nums">00</div>
+                    <p class="text-gray-500 text-xs mt-1 uppercase tracking-wider">Минут</p>
+                </div>
+                <div class="text-4xl sm:text-5xl font-extrabold text-neon-500 leading-none">:</div>
+                <div class="text-center">
+                    <div id="cd-secs" class="text-4xl sm:text-5xl font-extrabold text-white tabular-nums">00</div>
+                    <p class="text-gray-500 text-xs mt-1 uppercase tracking-wider">Секунд</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const target = new Date('2026-05-16T15:00:00+08:00').getTime();
+            function update() {
+                const now = Date.now();
+                const diff = target - now;
+                if (diff <= 0) {
+                    document.getElementById('cd-days').textContent = '00';
+                    document.getElementById('cd-hours').textContent = '00';
+                    document.getElementById('cd-mins').textContent = '00';
+                    document.getElementById('cd-secs').textContent = '00';
+                    return;
+                }
+                const d = Math.floor(diff / 86400000);
+                const h = Math.floor((diff % 86400000) / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
+                document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+                document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+                document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+                document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+            }
+            update();
+            setInterval(update, 1000);
+        })();
+    </script>
+
     <!-- Онцлог мэдээлэл -->
     <div class="py-12 bg-steel-900/60 backdrop-blur-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -293,6 +347,30 @@
         </div>
     </div>
 
+    <!-- Багшийн танилцуулга -->
+    <div class="py-16 sm:py-20 bg-steel-800/50 backdrop-blur-sm border-y border-gray-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-white">Багшийн тухай</h2>
+            </div>
+            <div class="flex flex-col md:flex-row items-center gap-10">
+                <div class="flex-shrink-0">
+                    <img src="/static/459188839_122114027030459676_6481272640772000522_n.jpg" alt="Gabriel" class="w-40 h-40 sm:w-52 sm:h-52 rounded-2xl object-cover border-2 border-neon-500 shadow-[0_0_30px_rgba(0,122,255,0.25)]">
+                </div>
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-extrabold text-white mb-1">Gabriel Wavecounter</h3>
+                    <p class="text-neon-500 font-semibold mb-4">Elliott Wave Analyst · Trader</p>
+                    <p class="text-gray-400 leading-relaxed mb-6">Форекс болон санхүүгийн зах зээлд Elliott Wave онолыг ашигласан арилжааны туршлагатай. Зах зээлийн долгионы бүтцийг задалж, тодорхой стратегиар арилжаа хийх арга барилаа оролцогчдод шилжүүлэх зорилготой. XM Broker-тэй хамтарч, трейдеруудыг дэмжих энэ семинарыг зохион байгуулж байна.</p>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                        <span class="px-4 py-1.5 rounded-full bg-steel-900 border border-gray-700 text-sm text-gray-300"><i class="fa-solid fa-chart-line text-neon-500 mr-2"></i>Elliott Wave</span>
+                        <span class="px-4 py-1.5 rounded-full bg-steel-900 border border-gray-700 text-sm text-gray-300"><i class="fa-solid fa-brain text-neon-500 mr-2"></i>Trading Psychology</span>
+                        <span class="px-4 py-1.5 rounded-full bg-steel-900 border border-gray-700 text-sm text-gray-300"><i class="fa-solid fa-crosshairs text-neon-500 mr-2"></i>Scalping Strategy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="register" class="py-16 sm:py-20 relative bg-steel-900/60 backdrop-blur-sm z-10">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-steel-800/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-700 overflow-hidden flex flex-col md:flex-row">
@@ -348,6 +426,75 @@
         </div>
     </div>
 
+
+    <!-- FAQ -->
+    <div class="py-16 sm:py-20 bg-steel-800/50 backdrop-blur-sm border-t border-gray-800">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-white">Түгээмэл асуултууд</h2>
+            </div>
+            <div class="space-y-3" id="faq-list">
+                <div class="faq-item bg-steel-900/80 rounded-xl border border-gray-700 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left">
+                        <span class="font-semibold text-white">Анхан шатны хүн орж болох уу?</span>
+                        <i class="fa-solid fa-chevron-down text-neon-500 transition-transform duration-300 flex-shrink-0 ml-4"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-4 text-gray-400 text-sm leading-relaxed">
+                        Тийм, болно. Семинар нь арилжааны суурь ойлголтоос эхлэн ахисан түвшний Elliott Wave задлал хүртэл хамардаг тул дурын түвшний хүн хэрэгтэй мэдлэг авах боломжтой.
+                    </div>
+                </div>
+                <div class="faq-item bg-steel-900/80 rounded-xl border border-gray-700 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left">
+                        <span class="font-semibold text-white">XM данс заавал байх ёстой юу?</span>
+                        <i class="fa-solid fa-chevron-down text-neon-500 transition-transform duration-300 flex-shrink-0 ml-4"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-4 text-gray-400 text-sm leading-relaxed">
+                        Заавал биш. Гэхдээ XM бол манай хамтрагч брокер бөгөөд зааланы төлбөрийг дэмждэг. Семинарын дараа XM данс нээхэд туслах бүрэн заавар өгнө.
+                    </div>
+                </div>
+                <div class="faq-item bg-steel-900/80 rounded-xl border border-gray-700 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left">
+                        <span class="font-semibold text-white">Тасалбараа буцааж болох уу?</span>
+                        <i class="fa-solid fa-chevron-down text-neon-500 transition-transform duration-300 flex-shrink-0 ml-4"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-4 text-gray-400 text-sm leading-relaxed">
+                        Семинараас 3-аас дээш хоногийн өмнө мэдэгдвэл буцаан олгоно. Үүнээс бага хугацааны хувьд дараагийн арга хэмжээнд шилжүүлэх боломжтой.
+                    </div>
+                </div>
+                <div class="faq-item bg-steel-900/80 rounded-xl border border-gray-700 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left">
+                        <span class="font-semibold text-white">Семинарт бүртгүүлсний дараа юу болох вэ?</span>
+                        <i class="fa-solid fa-chevron-down text-neon-500 transition-transform duration-300 flex-shrink-0 ml-4"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-4 text-gray-400 text-sm leading-relaxed">
+                        Төлбөр амжилттай хийгдсэний дараа бид таны утасны дугаарт холбогдож суудлыг баталгаажуулна. Семинараас өмнө байршил болон хуваарийн мэдээллийг дахин илгээнэ.
+                    </div>
+                </div>
+                <div class="faq-item bg-steel-900/80 rounded-xl border border-gray-700 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left">
+                        <span class="font-semibold text-white">Хоол унд багтсан уу?</span>
+                        <i class="fa-solid fa-chevron-down text-neon-500 transition-transform duration-300 flex-shrink-0 ml-4"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-4 text-gray-400 text-sm leading-relaxed">
+                        Тийм. Семинарын үеэр идэж уух зүйл байх болно.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleFaq(btn) {
+            const answer = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            const isOpen = !answer.classList.contains('hidden');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+            document.querySelectorAll('.faq-item i').forEach(i => i.style.transform = '');
+            if (!isOpen) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
 
     <div id="qpayModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300 bg-black/80 backdrop-blur-sm" style="display:none;">
         <div class="bg-steel-800 w-full max-w-md rounded-2xl border border-gray-700 shadow-2xl transform scale-95 transition-transform duration-300 p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto">
