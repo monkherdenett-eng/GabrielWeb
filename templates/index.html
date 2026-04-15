@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel Wavecounter | Семинар 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        steel: {
+                            800: '#1e2329',
+                            900: '#161a1e',
+                        },
+                        neon: {
+                            500: '#007AFF',
+                            600: '#005bb5',
+                        },
+                        discord: {
+                            bg: '#313338',
+                            dark: '#2B2D31',
+                            darker: '#1E1F22',
+                            text: '#DBDEE1',
+                            muted: '#949BA4'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            color: #ffffff;
+            background-color: #161a1e;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e2329; }
+        ::-webkit-scrollbar-thumb { background: #007AFF; }
+
+        .bg-image-wrapper {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -10;
+            overflow: hidden;
+        }
+        .bg-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.3);
+        }
+        /* iOS fixed background fix */
+        @supports (-webkit-touch-callout: none) {
+            .bg-image-wrapper {
+                position: fixed;
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
+        }
+
+        /* Discord custom scrollbar */
+        .discord-scroll::-webkit-scrollbar { width: 4px; }
+        .discord-scroll::-webkit-scrollbar-track { background: #2B2D31; }
+        .discord-scroll::-webkit-scrollbar-thumb { background: #1A1B1E; border-radius: 10px; }
+    </style>
+</head>
+<body class="antialiased font-sans">
+
+    <div class="bg-image-wrapper">
+        <img src="/static/images.jpg" alt="Background">
+    </div>
+
+    <nav class="fixed w-full z-50 bg-steel-900/70 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                    <img src="/static/459188839_122114027030459676_6481272640772000522_n.jpg" alt="Gabriel Trader Wavecounting" class="h-8 sm:h-14 flex-shrink-0">
+                    <span class="hidden sm:inline text-2xl font-bold tracking-tighter text-white">Gabriel Wavecounter</span>
+                    <span class="sm:hidden text-sm font-bold tracking-tighter text-white truncate">Gabriel Wavecounter</span>
+                </div>
+                <a href="#register" class="bg-neon-500 hover:bg-neon-600 text-white px-4 py-2 sm:px-6 rounded-md font-semibold text-sm sm:text-base transition-all shadow-[0_0_15px_rgba(0,122,255,0.3)]">
+                    Бүртгүүлэх
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="relative pt-24 pb-16 sm:pt-32 sm:pb-20 lg:pt-48 lg:pb-32 overflow-hidden text-center">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-block mb-4 px-4 py-1 rounded-full bg-steel-800/80 backdrop-blur-sm border border-gray-700 text-sm font-medium text-gray-300">
+                <i class="fa-solid fa-location-dot text-neon-500 mr-2"></i> Millennium Plaza (Бөхийн өргөөний ард)
+            </div>
+            <h1 class="text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-6 drop-shadow-lg">
+                Санхүүгийн зах зээлийг <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-500 to-blue-300">долгионоор унших нь</span>
+            </h1>
+            <p class="mt-4 max-w-2xl text-base sm:text-xl text-gray-300 mx-auto mb-10 drop-shadow-md">
+                Elliott Wave онол болон Wavecounter логикийг ашиглан арилжааны зах зээл дээрх эргэлзээгээ арилгаж, дараагийн алхмаа тооцоолж сурах цогц семинар.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#register" class="w-full sm:w-auto bg-neon-500 hover:bg-neon-600 text-white px-8 py-4 rounded-md font-bold text-lg transition-all shadow-[0_0_20px_rgba(0,122,255,0.4)]">
+                    Тасалбар авах (250,000₮)
+                </a>
+                <div class="text-gray-300 flex items-center gap-2 font-medium">
+                    <i class="fa-regular fa-calendar text-neon-500"></i>
+                    <span>2026.05.16</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-steel-800/80 backdrop-blur-md border-y border-gray-700 py-4">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-lg font-medium">
+                <span class="text-yellow-500"><i class="fa-solid fa-fire mr-2"></i>Анхаар:</span> Нийт <span class="font-bold text-white">350</span> суудалтай. Одоогоор цөөн суудал үлдлээ!
+            </p>
+        </div>
+    </div>
+
+    <div class="py-20 bg-steel-900/80 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white drop-shadow-md">Семинараас та юу сурах вэ?</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <div class="bg-steel-800/90 backdrop-blur-md p-8 rounded-xl border border-gray-700 hover:border-neon-500 transition-colors shadow-xl">
+                    <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-chart-line text-2xl text-neon-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Wave Logic Суурь</h3>
+                    <p class="text-gray-400">Зах зээлийн хөдөлгөөнийг эмх замбараагүй биш, тодорхой долгионы давтамжаар харах логик сэтгэлгээ.</p>
+                </div>
+                <div class="bg-steel-800/90 backdrop-blur-md p-8 rounded-xl border border-gray-700 hover:border-neon-500 transition-colors shadow-xl">
+                    <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-shield-halved text-2xl text-neon-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Эрсдэлийн Удирдлага</h3>
+                    <p class="text-gray-400">Хөрөнгөө хэрхэн хамгаалах болон сэтгэл зүйгээ хэрхэн удирдах талаарх бодит туршлага.</p>
+                </div>
+                <div class="bg-steel-800/90 backdrop-blur-md p-8 rounded-xl border border-gray-700 hover:border-neon-500 transition-colors shadow-xl">
+                    <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-crosshairs text-2xl text-neon-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Практик Арилжаа</h3>
+                    <p class="text-gray-400">Онолыг бодит чарт дээр хэрхэн буулгах, арилжааны цэгүүдээ (Entry/Exit) хэрхэн тодорхойлох вэ.</p>
+                </div>
+                <div class="bg-steel-800/90 backdrop-blur-md p-8 rounded-xl border border-gray-700 hover:border-neon-500 transition-colors shadow-xl">
+                    <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-water text-2xl text-neon-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Elliott Wave Онол</h3>
+                    <p class="text-gray-400">Ralph Nelson Elliott-ийн зах зээлийн долгионы бүтэц, 5+3 импульс ба залруулгын хэв маягийг гүнзгий судлах.</p>
+                </div>
+                <div class="bg-steel-800/90 backdrop-blur-md p-8 rounded-xl border border-gray-700 hover:border-neon-500 transition-colors shadow-xl">
+                    <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-laptop-code text-2xl text-neon-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Амьд Арилжааны Үзүүлбэр</h3>
+                    <p class="text-gray-400">Бодит зах зээл дээр шууд арилжаа хийж үзүүлэх, стратегиа хэрхэн хэрэгжүүлэхийг нүдээр харах.</p>
+                </div>
+                <div class="bg-steel-800/90 backdrop-blur-md p-8 rounded-xl border border-gray-700 hover:border-neon-500 transition-colors shadow-xl">
+                    <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/XM_Logo_2.png" alt="XM" class="w-8 h-8 object-contain">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">XM Broker Танилцуулга</h3>
+                    <p class="text-gray-400">XM брокерийн бүртгэл, данс нээх, урамшуулал авах зааврууд болон арилжааны платформ ашиглах гарын авлага.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="register" class="py-16 sm:py-20 relative bg-steel-900/60 backdrop-blur-sm z-10">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-steel-800/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-700 overflow-hidden flex flex-col md:flex-row">
+                <div class="p-6 sm:p-10 md:w-5/12 bg-gray-900/80 flex flex-col justify-between border-b md:border-b-0 md:border-r border-gray-800">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">Бүртгэл баталгаажуулах</h3>
+                        <p class="text-gray-400 mb-8">Мэдээллээ үнэн зөв бөглөсний дараа төлбөрөө төлнө үү.</p>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <i class="fa-solid fa-calendar-check text-neon-500 mt-1 text-xl"></i>
+                                <div>
+                                    <h4 class="font-semibold">Хугацаа</h4>
+                                    <p class="text-gray-400 text-sm">2026.05.16 (Бямба гараг)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <i class="fa-solid fa-location-dot text-neon-500 mt-1 text-xl"></i>
+                                <div>
+                                    <h4 class="font-semibold">Байршил</h4>
+                                    <p class="text-gray-400 text-sm">Millennium Plaza, Бөхийн өргөөний ард</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <i class="fa-solid fa-ticket text-neon-500 mt-1 text-xl"></i>
+                                <div>
+                                    <h4 class="font-semibold">Тасалбарын үнэ</h4>
+                                    <p class="text-neon-500 font-bold text-lg">250,000₮</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 sm:p-10 md:w-7/12">
+                    <form id="registrationForm" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Овог, Нэр *</label>
+                            <input type="text" id="fullName" required class="w-full bg-steel-900/80 border border-gray-700 rounded-md px-4 py-3 text-white focus:outline-none focus:border-neon-500 focus:ring-1 focus:ring-neon-500 transition-colors" placeholder="Жишээ: Бат Дорж">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Утасны дугаар *</label>
+                            <input type="tel" id="phone" required class="w-full bg-steel-900/80 border border-gray-700 rounded-md px-4 py-3 text-white focus:outline-none focus:border-neon-500 focus:ring-1 focus:ring-neon-500 transition-colors" placeholder="Жишээ: 99112233">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Имэйл хаяг</label>
+                            <input type="email" id="email" class="w-full bg-steel-900/80 border border-gray-700 rounded-md px-4 py-3 text-white focus:outline-none focus:border-neon-500 focus:ring-1 focus:ring-neon-500 transition-colors" placeholder="Жишээ: bat@example.com">
+                        </div>
+                        <button type="submit" class="w-full bg-neon-500 hover:bg-neon-600 text-white font-bold py-4 rounded-md transition-all flex justify-center items-center gap-2">
+                            <i class="fa-solid fa-qrcode"></i> QPay-ээр төлөх
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-16 sm:py-20 bg-steel-800/60 backdrop-blur-md border-t border-gray-800 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white drop-shadow-md">V.I.P Discord Server</h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Зөвхөн сургалтад суусан болон манай багт нэгдсэн хүмүүст зориулсан хаалттай Discord групп.</p>
+            </div>
+
+            <!-- Үндсэн мэдээллийн хэсэг -->
+            <div class="mb-12">
+                <h3 class="text-xl sm:text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <i class="fa-brands fa-discord text-[#5865F2]"></i> Gabriel's Trading Arena
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 hover:border-neon-500 transition-colors">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">💲</span>
+                            <h4 class="font-bold text-white">ашиг</h4>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">Гишүүд болон багш нарын хийсэн арилжааны ашиг, үр дүнгээ хуваалцах хэсэг.</p>
+                    </div>
+                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 hover:border-neon-500 transition-colors">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">🥇</span>
+                            <h4 class="font-bold text-white">сэтгэгдэл</h4>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">Сургалт болон дохиог ашигласан хүмүүсийн бодит санал, сэтгэгдлүүд.</p>
+                    </div>
+                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 hover:border-neon-500 transition-colors">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">🎬</span>
+                            <h4 class="font-bold text-white">social-content</h4>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">Youtube, Instagram, Tiktok зэрэг сошиал хуудсуудад орсон шинэ бичлэг, контентууд.</p>
+                    </div>
+                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 hover:border-neon-500 transition-colors">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">📊</span>
+                            <h4 class="font-bold text-white">анализ</h4>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">Зах зээлийн чиг хандлага, графикийн задлан шинжилгээг хуваалцах хэсэг.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BROKERS -->
+            <div class="mb-12">
+                <h3 class="text-lg font-bold text-gray-300 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-building-columns text-neon-500"></i> BROKERS — Брокерууд
+                </h3>
+                <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700">
+                    <p class="text-gray-400 text-sm leading-relaxed">Арилжаа хийхэд найдвартай, санал болгож буй брокеруудын (<span class="text-white font-semibold">Vantage, XM, Trenomarkets</span>) бүртгэлийн линк, заавар болон урамшууллын мэдээллийг агуулсан хэсэг.</p>
+                </div>
+            </div>
+
+            <!-- СУРГАЛТ -->
+            <div class="mb-12">
+                <h3 class="text-lg font-bold text-gray-300 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap text-neon-500"></i> СУРГАЛТ — Үе шаттай хичээлүүд
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 border-l-4 border-l-green-500">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xl">🟩</span>
+                            <h4 class="font-bold text-white">beginner</h4>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">Арилжааны талаарх анхан шатны ойлголтууд.</p>
+                    </div>
+                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 border-l-4 border-l-blue-500">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xl">🟦</span>
+                            <h4 class="font-bold text-white">intermediate</h4>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">Дунд түвшний мэдлэг, графикийн хэв маягууд.</p>
+                    </div>
+                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 border-l-4 border-l-orange-500">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xl">🟧</span>
+                            <h4 class="font-bold text-white">advanced</h4>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">Ахисан түвшний зах зээлийн бүтэц, сэтгэл зүйн удирдлага.</p>
+                    </div>
+                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 border-l-4 border-l-red-500">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xl">🟥</span>
+                            <h4 class="font-bold text-white">scalping-strategy</h4>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">Богино хугацааны арилжаа буюу "Scalping" хийх тусгай стратеги.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXCLUSIVE -->
+            <div class="mb-12">
+                <h3 class="text-lg font-bold text-gray-300 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-crown text-yellow-500"></i> EXCLUSIVE — VIP гишүүдэд
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-gradient-to-br from-steel-900/90 to-steel-800/60 backdrop-blur-sm rounded-xl p-5 border border-yellow-500/30">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">💬</span>
+                            <h4 class="font-bold text-white">чат-өрөө</h4>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">Зөвхөн сургалтад суусан эсвэл VIP гишүүд хоорондоо харилцах, санал солилцох хаалттай групп.</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-steel-900/90 to-steel-800/60 backdrop-blur-sm rounded-xl p-5 border border-yellow-500/30">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">📈</span>
+                            <h4 class="font-bold text-white">сигнал</h4>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">Хэзээ, ямар ханш дээрээс арилжаанд орох (Buy/Sell) шууд дохионууд ирэх хэсэг.</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-steel-900/90 to-steel-800/60 backdrop-blur-sm rounded-xl p-5 border border-yellow-500/30">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">🤝</span>
+                            <h4 class="font-bold text-white">уулзалт</h4>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">Багштай хийх амьд (Live) уулзалтууд болон асуулт хариултын цаг.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Discord нэгдэх + Холбоо барих -->
+            <div class="bg-steel-900/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-700">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+                    <div class="text-center sm:text-left">
+                        <h3 class="text-xl font-bold text-white mb-2">Хэрхэн Discord-д нэгдэх вэ?</h3>
+                        <p class="text-gray-400 text-sm max-w-lg">Манай VIP групп нь зөвхөн урилгаар нэвтэрдэг хаалттай коммьюнити юм. Доорх сувгаар бидэнтэй холбогдож, баталгаажуулалт хийлгэсний дараа <span class="text-neon-500 font-bold">Discord Invite Link</span> авна.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <a href="https://m.me/61563790288323" target="_blank" class="w-14 h-14 flex items-center justify-center rounded-xl bg-[#1877F2] hover:bg-[#0A4EAB] transition-colors shadow-lg" title="Facebook Messenger">
+                            <i class="fa-brands fa-facebook-f text-white text-xl"></i>
+                        </a>
+                        <a href="https://ig.me/m/gabriel.wavecounter" target="_blank" class="w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF] hover:opacity-80 transition-opacity shadow-lg" title="Instagram DM">
+                            <i class="fa-brands fa-instagram text-white text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="qpayModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300 bg-black/80 backdrop-blur-sm" style="display:none;">
+        <div class="bg-steel-800 w-full max-w-md rounded-2xl border border-gray-700 shadow-2xl transform scale-95 transition-transform duration-300 p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto">
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-white mb-2">Төлбөр төлөх</h3>
+                <p class="text-gray-400">Та доорх QR кодыг уншуулж төлбөрөө төлнө үү.</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl flex justify-center mb-6">
+                <img src="https://via.placeholder.com/250x250.png?text=Таны+QPay+QR+Код+Энд+Байрлана" alt="QPay QR Code" class="w-64 h-64 object-contain">
+            </div>
+            <div class="bg-steel-900 rounded-lg p-4 mb-6 border border-gray-700 text-center">
+                <p class="text-sm text-gray-400 mb-1">Төлөх дүн:</p>
+                <p class="text-2xl font-bold text-neon-500">250,000₮</p>
+            </div>
+            <div class="bg-yellow-500/10 border border-yellow-500/50 rounded-lg p-4 text-center">
+                <p class="text-yellow-500 text-sm font-medium">
+                    <i class="fa-solid fa-triangle-exclamation mr-1"></i> Маш чухал: Гүйлгээний утга дээр та <span class="font-bold underline" id="displayPhone">УТАСНЫ ДУГААРАА</span> заавал бичнэ үү!
+                </p>
+            </div>
+            <p class="text-center text-xs text-gray-500 mt-6">
+                Төлбөр амжилттай хийгдсэний дараа бид тантай холбогдож суудлыг баталгаажуулах болно.
+            </p>
+        </div>
+    </div>
+
+    <footer class="bg-steel-900/90 backdrop-blur-md border-t border-gray-800 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0 text-center md:text-left">
+                    <h3 class="text-xl font-bold text-white mb-2">Gabriel Wavecounter</h3>
+                    <p class="text-gray-500 text-sm">© 2026 Gabriel Wavecounter. Бүх эрх хуулиар хамгаалагдсан.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://www.facebook.com/profile.php?id=61563790288323" target="_blank" class="text-gray-400 hover:text-[#1877F2] transition-colors">
+                        <i class="fa-brands fa-facebook text-2xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/gabriel.wavecounter/" target="_blank" class="text-gray-400 hover:text-[#E4405F] transition-colors">
+                        <i class="fa-brands fa-instagram text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const modal = document.getElementById('qpayModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const phoneInput = document.getElementById('phone');
+        const displayPhone = document.getElementById('displayPhone');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            displayPhone.innerText = phoneInput.value + " гэж";
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.firstElementChild.classList.remove('scale-95');
+                modal.firstElementChild.classList.add('scale-100');
+            }, 10);
+        });
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modal.firstElementChild.classList.remove('scale-100');
+            modal.firstElementChild.classList.add('scale-95');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', function(e) {
+            if(e.target === modal) { closeModal(); }
+        });
+    </script>
+</body>
+</html>
