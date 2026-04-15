@@ -236,127 +236,117 @@
 
     <div class="py-16 sm:py-20 bg-steel-800/60 backdrop-blur-md border-t border-gray-800 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-white drop-shadow-md">V.I.P Discord Server</h2>
-                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Зөвхөн сургалтад суусан болон манай багт нэгдсэн хүмүүст зориулсан хаалттай Discord групп.</p>
+
+            <div class="text-center mb-10">
+                <div class="inline-flex items-center gap-3 mb-4">
+                    <i class="fa-brands fa-discord text-[#5865F2] text-4xl"></i>
+                    <h2 class="text-3xl font-bold text-white">V.I.P Discord Server</h2>
+                </div>
+                <p class="text-gray-400 max-w-2xl mx-auto">Зөвхөн сургалтад суусан болон манай багт нэгдсэн хүмүүст зориулсан хаалттай Discord групп.</p>
             </div>
 
-            <!-- Үндсэн мэдээллийн хэсэг -->
-            <div class="mb-12">
-                <h3 class="text-xl sm:text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                    <i class="fa-brands fa-discord text-[#5865F2]"></i> Gabriel's Trading Arena
-                </h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 hover:border-neon-500 transition-colors">
-                        <div class="flex items-center gap-3 mb-2">
-                            <span class="text-2xl">💲</span>
-                            <h4 class="font-bold text-white">ашиг</h4>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Гишүүд болон багш нарын хийсэн арилжааны ашиг, үр дүнгээ хуваалцах хэсэг.</p>
+            <!-- Discord UI -->
+            <div class="rounded-xl overflow-hidden border border-[#1E1F22] shadow-2xl flex flex-col md:flex-row" style="background:#313338; min-height:540px;">
+
+                <!-- Sidebar -->
+                <div class="flex flex-row md:flex-col md:w-64 flex-shrink-0 overflow-x-auto md:overflow-y-auto md:overflow-x-hidden discord-scroll" style="background:#2B2D31;">
+
+                    <!-- Server header -->
+                    <div class="hidden md:flex items-center justify-between px-4 py-3 border-b border-[#1E1F22] cursor-pointer hover:bg-[#35373C] transition-colors flex-shrink-0">
+                        <span class="font-bold text-white text-sm truncate">Gabriel's Trading Arena</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 text-xs ml-2"></i>
                     </div>
-                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 hover:border-neon-500 transition-colors">
-                        <div class="flex items-center gap-3 mb-2">
-                            <span class="text-2xl">🥇</span>
-                            <h4 class="font-bold text-white">сэтгэгдэл</h4>
+
+                    <div class="flex flex-row md:flex-col w-full md:w-auto p-2 md:p-0 gap-1 md:gap-0">
+
+                        <!-- НИЙТИЙН хэсэг -->
+                        <div class="hidden md:block px-2 pt-4 pb-1">
+                            <span class="text-[11px] font-semibold text-[#949BA4] uppercase tracking-wider">Нийтийн</span>
                         </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Сургалт болон дохиог ашигласан хүмүүсийн бодит санал, сэтгэгдлүүд.</p>
+                        <button onclick="showChannel('ashig')" id="btn-ashig" class="discord-channel-btn active-channel flex items-center gap-2 px-2 py-1.5 rounded text-sm w-full text-left transition-colors flex-shrink-0">
+                            <span class="text-base">💲</span><span class="truncate">ашиг</span>
+                        </button>
+                        <button onclick="showChannel('setgegdel')" id="btn-setgegdel" class="discord-channel-btn flex items-center gap-2 px-2 py-1.5 rounded text-sm w-full text-left transition-colors flex-shrink-0">
+                            <span class="text-base">🥇</span><span class="truncate">сэтгэгдэл</span>
+                        </button>
+                        <button onclick="showChannel('social')" id="btn-social" class="discord-channel-btn flex items-center gap-2 px-2 py-1.5 rounded text-sm w-full text-left transition-colors flex-shrink-0">
+                            <span class="text-base">🎬</span><span class="truncate">social-content</span>
+                        </button>
+                        <button onclick="showChannel('analiz')" id="btn-analiz" class="discord-channel-btn flex items-center gap-2 px-2 py-1.5 rounded text-sm w-full text-left transition-colors flex-shrink-0">
+                            <span class="text-base">📊</span><span class="truncate">анализ</span>
+                        </button>
+
+                        <!-- BROKERS хэсэг -->
+                        <div class="hidden md:block px-2 pt-4 pb-1">
+                            <span class="text-[11px] font-semibold text-[#949BA4] uppercase tracking-wider">Brokers</span>
+                        </div>
+                        <button onclick="showChannel('brokers')" id="btn-brokers" class="discord-channel-btn flex items-center gap-2 px-2 py-1.5 rounded text-sm w-full text-left transition-colors flex-shrink-0">
+                            <i class="fa-solid fa-building-columns text-[#949BA4] w-4 text-center text-xs"></i><span class="truncate">brokers</span>
+                        </button>
+
+                        <!-- СУРГАЛТ хэсэг -->
+                        <div class="hidden md:block px-2 pt-4 pb-1">
+                            <span class="text-[11px] font-semibold text-[#949BA4] uppercase tracking-wider">Сургалт</span>
+                        </div>
+                        <button onclick="showChannel('beginner')" id="btn-beginner" class="discord-channel-btn flex items-center gap-2 px-2 py-1.5 rounded text-sm w-full text-left transition-colors flex-shrink-0">
+                            <span class="text-base">🟩</span><span class="truncate">beginner</span>
+                        </button>
+                        <button onclick="showChannel('intermediate')" id="btn-intermediate" class="discord-channel-btn flex items-center gap-2 px-2 py-1.5 rounded text-sm w-full text-left transition-colors flex-shrink-0">
+                            <span class="text-base">🟦</span><span class="truncate">intermediate</span>
+                        </button>
+                        <button onclick="showChannel('advanced')" id="btn-advanced" class="discord-channel-btn flex items-center gap-2 px-2 py-1.5 rounded text-sm w-full text-left transition-colors flex-shrink-0">
+                            <span class="text-base">🟧</span><span class="truncate">advanced</span>
+                        </button>
+                        <button onclick="showChannel('scalping')" id="btn-scalping" class="discord-channel-btn flex items-center gap-2 px-2 py-1.5 rounded text-sm w-full text-left transition-colors flex-shrink-0">
+                            <span class="text-base">🟥</span><span class="truncate">scalping-strategy</span>
+                        </button>
+
+                        <!-- EXCLUSIVE хэсэг -->
+                        <div class="hidden md:block px-2 pt-4 pb-1">
+                            <span class="text-[11px] font-semibold text-yellow-500 uppercase tracking-wider flex items-center gap-1"><i class="fa-solid fa-crown text-xs"></i> Exclusive</span>
+                        </div>
+                        <button onclick="showChannel('chat')" id="btn-chat" class="discord-channel-btn flex items-center gap-2 px-2 py-1.5 rounded text-sm w-full text-left transition-colors flex-shrink-0">
+                            <span class="text-base">💬</span><span class="truncate">чат-өрөө</span>
+                        </button>
+                        <button onclick="showChannel('signal')" id="btn-signal" class="discord-channel-btn flex items-center gap-2 px-2 py-1.5 rounded text-sm w-full text-left transition-colors flex-shrink-0">
+                            <span class="text-base">📈</span><span class="truncate">сигнал</span>
+                        </button>
+                        <button onclick="showChannel('meet')" id="btn-meet" class="discord-channel-btn flex items-center gap-2 px-2 py-1.5 rounded text-sm w-full text-left transition-colors flex-shrink-0">
+                            <span class="text-base">🤝</span><span class="truncate">уулзалт</span>
+                        </button>
                     </div>
-                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 hover:border-neon-500 transition-colors">
-                        <div class="flex items-center gap-3 mb-2">
-                            <span class="text-2xl">🎬</span>
-                            <h4 class="font-bold text-white">social-content</h4>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Youtube, Instagram, Tiktok зэрэг сошиал хуудсуудад орсон шинэ бичлэг, контентууд.</p>
+                </div>
+
+                <!-- Main content area -->
+                <div class="flex-1 flex flex-col">
+                    <!-- Channel header -->
+                    <div class="flex items-center gap-2 px-4 py-3 border-b border-[#1E1F22] flex-shrink-0" style="background:#313338;">
+                        <span id="channel-icon" class="text-lg">💲</span>
+                        <span id="channel-name" class="font-semibold text-white text-sm">ашиг</span>
                     </div>
-                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 hover:border-neon-500 transition-colors">
-                        <div class="flex items-center gap-3 mb-2">
-                            <span class="text-2xl">📊</span>
-                            <h4 class="font-bold text-white">анализ</h4>
+
+                    <!-- Channel content -->
+                    <div class="flex-1 flex flex-col items-start justify-end p-6">
+                        <div id="channel-content" class="w-full">
+                            <!-- Default: ашиг -->
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center text-3xl" style="background:#1E1F22;">💲</div>
+                                <div>
+                                    <h3 class="text-white font-bold text-xl">ашиг</h3>
+                                    <p class="text-[#949BA4] text-sm">Нийтийн суваг</p>
+                                </div>
+                            </div>
+                            <p class="text-white font-bold text-lg mb-1">ашиг сувагт тавтай морил!</p>
+                            <p class="text-[#B5BAC1] text-sm leading-relaxed">Гишүүд болон багш нарын хийсэн арилжааны ашиг, үр дүнгээ хуваалцах хэсэг. Амжилтаа бусадтай хуваалцаж, нийгэмлэгийнхээ урам зоригийг нэмэгдүүлээрэй.</p>
+                            <div class="mt-4 h-px w-full" style="background:#3F4147;"></div>
+                            <p class="text-[#949BA4] text-xs mt-3">Энэ бол <span class="text-white font-semibold">#ашиг</span> сувгийн эхлэл.</p>
                         </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Зах зээлийн чиг хандлага, графикийн задлан шинжилгээг хуваалцах хэсэг.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- BROKERS -->
-            <div class="mb-12">
-                <h3 class="text-lg font-bold text-gray-300 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-building-columns text-neon-500"></i> BROKERS — Брокерууд
-                </h3>
-                <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700">
-                    <p class="text-gray-400 text-sm leading-relaxed">Арилжаа хийхэд найдвартай, санал болгож буй брокеруудын (<span class="text-white font-semibold">Vantage, XM, Trenomarkets</span>) бүртгэлийн линк, заавар болон урамшууллын мэдээллийг агуулсан хэсэг.</p>
-                </div>
-            </div>
-
-            <!-- СУРГАЛТ -->
-            <div class="mb-12">
-                <h3 class="text-lg font-bold text-gray-300 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-graduation-cap text-neon-500"></i> СУРГАЛТ — Үе шаттай хичээлүүд
-                </h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 border-l-4 border-l-green-500">
-                        <div class="flex items-center gap-3 mb-2">
-                            <span class="text-xl">🟩</span>
-                            <h4 class="font-bold text-white">beginner</h4>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Арилжааны талаарх анхан шатны ойлголтууд.</p>
-                    </div>
-                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 border-l-4 border-l-blue-500">
-                        <div class="flex items-center gap-3 mb-2">
-                            <span class="text-xl">🟦</span>
-                            <h4 class="font-bold text-white">intermediate</h4>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Дунд түвшний мэдлэг, графикийн хэв маягууд.</p>
-                    </div>
-                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 border-l-4 border-l-orange-500">
-                        <div class="flex items-center gap-3 mb-2">
-                            <span class="text-xl">🟧</span>
-                            <h4 class="font-bold text-white">advanced</h4>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Ахисан түвшний зах зээлийн бүтэц, сэтгэл зүйн удирдлага.</p>
-                    </div>
-                    <div class="bg-steel-900/70 backdrop-blur-sm rounded-xl p-5 border border-gray-700 border-l-4 border-l-red-500">
-                        <div class="flex items-center gap-3 mb-2">
-                            <span class="text-xl">🟥</span>
-                            <h4 class="font-bold text-white">scalping-strategy</h4>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Богино хугацааны арилжаа буюу "Scalping" хийх тусгай стратеги.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- EXCLUSIVE -->
-            <div class="mb-12">
-                <h3 class="text-lg font-bold text-gray-300 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-crown text-yellow-500"></i> EXCLUSIVE — VIP гишүүдэд
-                </h3>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div class="bg-gradient-to-br from-steel-900/90 to-steel-800/60 backdrop-blur-sm rounded-xl p-5 border border-yellow-500/30">
-                        <div class="flex items-center gap-3 mb-2">
-                            <span class="text-2xl">💬</span>
-                            <h4 class="font-bold text-white">чат-өрөө</h4>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Зөвхөн сургалтад суусан эсвэл VIP гишүүд хоорондоо харилцах, санал солилцох хаалттай групп.</p>
-                    </div>
-                    <div class="bg-gradient-to-br from-steel-900/90 to-steel-800/60 backdrop-blur-sm rounded-xl p-5 border border-yellow-500/30">
-                        <div class="flex items-center gap-3 mb-2">
-                            <span class="text-2xl">📈</span>
-                            <h4 class="font-bold text-white">сигнал</h4>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Хэзээ, ямар ханш дээрээс арилжаанд орох (Buy/Sell) шууд дохионууд ирэх хэсэг.</p>
-                    </div>
-                    <div class="bg-gradient-to-br from-steel-900/90 to-steel-800/60 backdrop-blur-sm rounded-xl p-5 border border-yellow-500/30">
-                        <div class="flex items-center gap-3 mb-2">
-                            <span class="text-2xl">🤝</span>
-                            <h4 class="font-bold text-white">уулзалт</h4>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Багштай хийх амьд (Live) уулзалтууд болон асуулт хариултын цаг.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Discord нэгдэх + Холбоо барих -->
-            <div class="bg-steel-900/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-700">
+            <!-- Discord нэгдэх -->
+            <div class="mt-8 bg-steel-900/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-700">
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
                     <div class="text-center sm:text-left">
                         <h3 class="text-xl font-bold text-white mb-2">Хэрхэн Discord-д нэгдэх вэ?</h3>
@@ -375,6 +365,50 @@
 
         </div>
     </div>
+
+    <style>
+        .discord-channel-btn { color: #949BA4; }
+        .discord-channel-btn:hover { background: #35373C; color: #DBDEE1; }
+        .active-channel { background: #404249 !important; color: #FFFFFF !important; }
+    </style>
+
+    <script>
+        const channels = {
+            ashig:        { icon: '💲', name: 'ашиг',            title: 'ашиг сувагт тавтай морил!',             desc: 'Гишүүд болон багш нарын хийсэн арилжааны ашиг, үр дүнгээ хуваалцах хэсэг. Амжилтаа бусадтай хуваалцаж, нийгэмлэгийнхээ урам зоригийг нэмэгдүүлээрэй.', tag: 'Нийтийн суваг' },
+            setgegdel:    { icon: '🥇', name: 'сэтгэгдэл',       title: 'сэтгэгдэл сувагт тавтай морил!',         desc: 'Сургалт болон дохиог ашигласан хүмүүсийн бодит санал, сэтгэгдлүүд. Таны туршлага бусдад асар их хэрэг болно.', tag: 'Нийтийн суваг' },
+            social:       { icon: '🎬', name: 'social-content',  title: 'social-content сувагт тавтай морил!',   desc: 'Youtube, Instagram, Tiktok зэрэг сошиал хуудсуудад орсон шинэ бичлэг, контентууд энд нийтлэгдэнэ. Дагаж, дэмжээрэй!', tag: 'Нийтийн суваг' },
+            analiz:       { icon: '📊', name: 'анализ',           title: 'анализ сувагт тавтай морил!',           desc: 'Зах зээлийн чиг хандлага, графикийн задлан шинжилгээг хуваалцах хэсэг. Долгионы задлалаа нийтэлж, хамтдаа суралцаарай.', tag: 'Нийтийн суваг' },
+            brokers:      { icon: '🏦', name: 'brokers',          title: 'brokers сувагт тавтай морил!',          desc: 'Арилжаа хийхэд найдвартай, санал болгож буй брокеруудын (Vantage, XM, Trenomarkets) бүртгэлийн линк, заавар болон урамшууллын мэдээллийг агуулсан хэсэг.', tag: 'Brokers' },
+            beginner:     { icon: '🟩', name: 'beginner',         title: 'beginner сувагт тавтай морил!',         desc: 'Арилжааны талаарх анхан шатны ойлголтууд. Форекс, индекс, крипто зах зээлд хэрхэн орох, платформ ашиглах зэрэг суурь мэдлэгийг эндээс авна.', tag: 'Сургалт' },
+            intermediate: { icon: '🟦', name: 'intermediate',     title: 'intermediate сувагт тавтай морил!',     desc: 'Дунд түвшний мэдлэг, графикийн хэв маягууд (patterns), тренд шугам, дэмжлэг эсэргүүцлийн түвшин зэрэг арилжааны гол хэрэгслүүдийг судална.', tag: 'Сургалт' },
+            advanced:     { icon: '🟧', name: 'advanced',         title: 'advanced сувагт тавтай морил!',         desc: 'Ахисан түвшний зах зээлийн бүтэц, market structure, liquidity, сэтгэл зүйн удирдлага болон Elliott Wave-ийн гүнзгий задлалыг энд судална.', tag: 'Сургалт' },
+            scalping:     { icon: '🟥', name: 'scalping-strategy',title: 'scalping-strategy сувагт тавтай морил!',desc: 'Богино хугацааны арилжаа буюу "Scalping" хийх тусгай стратеги. M1, M5 timeframe дээр хурдан орж гарах entry/exit цэгүүдийг практикаар сурна.', tag: 'Сургалт' },
+            chat:         { icon: '💬', name: 'чат-өрөө',         title: 'чат-өрөөнд тавтай морил!',             desc: 'Зөвхөн сургалтад суусан эсвэл VIP гишүүд хоорондоо харилцах, санал солилцох хаалттай групп. Энд чи жинхэнэ трейдерүүдтэй холбогдоно.', tag: '👑 Exclusive' },
+            signal:       { icon: '📈', name: 'сигнал',           title: 'сигнал сувагт тавтай морил!',           desc: 'Хэзээ, ямар ханш дээрээс арилжаанд орох (Buy/Sell), Stop Loss болон Take Profit түвшнүүдийн шууд дохионууд ирэх хэсэг. Зөвхөн VIP гишүүдэд.', tag: '👑 Exclusive' },
+            meet:         { icon: '🤝', name: 'уулзалт',          title: 'уулзалт сувагт тавтай морил!',          desc: 'Багштай хийх амьд (Live) уулзалтууд болон асуулт хариултын цаг. Тогтмол хуваарийн дагуу явагдах онлайн болон офлайн уулзалтуудад оролцох боломж.', tag: '👑 Exclusive' },
+        };
+
+        function showChannel(id) {
+            const ch = channels[id];
+            document.getElementById('channel-icon').textContent = ch.icon;
+            document.getElementById('channel-name').textContent = ch.name;
+            document.getElementById('channel-content').innerHTML = `
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-16 h-16 rounded-full flex items-center justify-center text-3xl" style="background:#1E1F22;">${ch.icon}</div>
+                    <div>
+                        <h3 class="text-white font-bold text-xl">${ch.name}</h3>
+                        <p class="text-[#949BA4] text-sm">${ch.tag}</p>
+                    </div>
+                </div>
+                <p class="text-white font-bold text-lg mb-1">${ch.title}</p>
+                <p class="text-[#B5BAC1] text-sm leading-relaxed">${ch.desc}</p>
+                <div class="mt-4 h-px w-full" style="background:#3F4147;"></div>
+                <p class="text-[#949BA4] text-xs mt-3">Энэ бол <span class="text-white font-semibold">#${ch.name}</span> сувгийн эхлэл.</p>
+            `;
+            document.querySelectorAll('.discord-channel-btn').forEach(b => b.classList.remove('active-channel'));
+            document.getElementById('btn-' + id).classList.add('active-channel');
+        }
+    </script>
 
     <div id="qpayModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300 bg-black/80 backdrop-blur-sm" style="display:none;">
         <div class="bg-steel-800 w-full max-w-md rounded-2xl border border-gray-700 shadow-2xl transform scale-95 transition-transform duration-300 p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto">
