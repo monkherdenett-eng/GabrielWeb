@@ -482,30 +482,68 @@
         }
     </script>
 
+    <!-- QPay Modal -->
     <div id="qpayModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300 bg-black/80 backdrop-blur-sm" style="display:none;">
         <div class="bg-steel-800 w-full max-w-md rounded-2xl border border-gray-700 shadow-2xl transform scale-95 transition-transform duration-300 p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto">
             <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-white">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
-            <div class="text-center mb-6">
-                <h3 class="text-2xl font-bold text-white mb-2">Төлбөр төлөх</h3>
-                <p class="text-gray-400">Та доорх QR кодыг уншуулж төлбөрөө төлнө үү.</p>
-            </div>
-            <div class="bg-white p-4 rounded-xl flex justify-center mb-6">
-                <img src="https://via.placeholder.com/250x250.png?text=Таны+QPay+QR+Код+Энд+Байрлана" alt="QPay QR Code" class="w-64 h-64 object-contain">
-            </div>
-            <div class="bg-steel-900 rounded-lg p-4 mb-6 border border-gray-700 text-center">
-                <p class="text-sm text-gray-400 mb-1">Төлөх дүн:</p>
-                <p class="text-2xl font-bold text-neon-500">25,000₮</p>
-            </div>
-            <div class="bg-yellow-500/10 border border-yellow-500/50 rounded-lg p-4 text-center">
-                <p class="text-yellow-500 text-sm font-medium">
-                    <i class="fa-solid fa-triangle-exclamation mr-1"></i> Маш чухал: Гүйлгээний утга дээр та <span class="font-bold underline" id="displayPhone">УТАСНЫ ДУГААРАА</span> заавал бичнэ үү!
+            <!-- Payment step -->
+            <div id="paymentStep">
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-bold text-white mb-2">Төлбөр төлөх</h3>
+                    <p class="text-gray-400">Та доорх QR кодыг уншуулж төлбөрөө төлнө үү.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl flex justify-center mb-6">
+                    <img src="https://via.placeholder.com/250x250.png?text=Таны+QPay+QR+Код+Энд+Байрлана" alt="QPay QR Code" class="w-64 h-64 object-contain">
+                </div>
+                <div class="bg-steel-900 rounded-lg p-4 mb-6 border border-gray-700 text-center">
+                    <p class="text-sm text-gray-400 mb-1">Төлөх дүн:</p>
+                    <p class="text-2xl font-bold text-neon-500">25,000₮</p>
+                </div>
+                <div class="bg-yellow-500/10 border border-yellow-500/50 rounded-lg p-4 mb-6 text-center">
+                    <p class="text-yellow-500 text-sm font-medium">
+                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Маш чухал: Гүйлгээний утга дээр та <span class="font-bold underline" id="displayPhone">УТАСНЫ ДУГААРАА</span> заавал бичнэ үү!
+                    </p>
+                </div>
+                <button id="confirmPaymentBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-md transition-all flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-circle-check"></i> Би төлбөрөө төлсөн
+                </button>
+                <p class="text-center text-xs text-gray-500 mt-4">
+                    QPay-ээр төлбөрөө гүйцэтгэсний дараа дээрх товчийг дарна уу.
                 </p>
             </div>
-            <p class="text-center text-xs text-gray-500 mt-6">
-                Төлбөр амжилттай хийгдсэний дараа бид тантай холбогдож суудлыг баталгаажуулах болно.
-            </p>
+            <!-- Saving step -->
+            <div id="savingStep" class="hidden text-center py-8">
+                <div class="w-16 h-16 border-4 border-neon-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p class="text-white font-semibold">Бүртгэл хадгалж байна...</p>
+            </div>
+            <!-- Success step -->
+            <div id="successStep" class="hidden text-center py-6">
+                <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa-solid fa-circle-check text-green-400 text-4xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">Бүртгэл амжилттай!</h3>
+                <p class="text-gray-400 mb-4">Таны бүртгэл баталгаажлаа. Бид тантай удахгүй холбогдох болно.</p>
+                <div id="confirmedName" class="bg-steel-900 rounded-lg p-4 border border-gray-700 text-left mb-6">
+                    <p class="text-sm text-gray-400">Нэр: <span id="successName" class="text-white font-semibold"></span></p>
+                    <p class="text-sm text-gray-400">Утас: <span id="successPhone" class="text-white font-semibold"></span></p>
+                </div>
+                <button onclick="closeModal()" class="w-full bg-neon-500 hover:bg-neon-600 text-white font-bold py-3 rounded-md transition-all">
+                    Хаах
+                </button>
+            </div>
+            <!-- Error step -->
+            <div id="errorStep" class="hidden text-center py-6">
+                <div class="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa-solid fa-circle-xmark text-red-400 text-4xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">Алдаа гарлаа</h3>
+                <p id="errorMsg" class="text-gray-400 mb-6">Дахин оролдоно уу.</p>
+                <button id="retryBtn" class="w-full bg-neon-500 hover:bg-neon-600 text-white font-bold py-3 rounded-md transition-all">
+                    Дахин оролдох
+                </button>
+            </div>
         </div>
     </div>
 
@@ -535,16 +573,23 @@
         const phoneInput = document.getElementById('phone');
         const displayPhone = document.getElementById('displayPhone');
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            displayPhone.innerText = phoneInput.value + " гэж";
+        let currentRegistration = {};
+
+        function showModalStep(stepId) {
+            ['paymentStep', 'savingStep', 'successStep', 'errorStep'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(stepId).classList.remove('hidden');
+        }
+
+        function openModal() {
             modal.style.display = 'flex';
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
                 modal.firstElementChild.classList.remove('scale-95');
                 modal.firstElementChild.classList.add('scale-100');
             }, 10);
-        });
+        }
 
         function closeModal() {
             modal.classList.add('opacity-0');
@@ -552,12 +597,75 @@
             modal.firstElementChild.classList.add('scale-95');
             setTimeout(() => {
                 modal.style.display = 'none';
+                showModalStep('paymentStep');
             }, 300);
         }
 
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Уншиж байна...';
+
+            currentRegistration = {
+                fullName: document.getElementById('fullName').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                email: document.getElementById('email').value.trim()
+            };
+
+            try {
+                const res = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(currentRegistration)
+                });
+                const result = await res.json();
+                if (result.success) {
+                    displayPhone.innerText = currentRegistration.phone + " гэж";
+                    showModalStep('paymentStep');
+                    openModal();
+                } else {
+                    alert(result.error || 'Алдаа гарлаа. Дахин оролдоно уу.');
+                }
+            } catch {
+                alert('Сервертэй холбогдоход алдаа гарлаа.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-qrcode"></i> QPay-ээр төлөх';
+            }
+        });
+
+        document.getElementById('confirmPaymentBtn').addEventListener('click', async function() {
+            showModalStep('savingStep');
+            try {
+                const res = await fetch('/api/save-registration', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(currentRegistration)
+                });
+                const result = await res.json();
+                if (result.success) {
+                    document.getElementById('successName').textContent = currentRegistration.fullName;
+                    document.getElementById('successPhone').textContent = currentRegistration.phone;
+                    showModalStep('successStep');
+                    form.reset();
+                } else {
+                    document.getElementById('errorMsg').textContent = result.error || 'Хадгалахад алдаа гарлаа.';
+                    showModalStep('errorStep');
+                }
+            } catch {
+                document.getElementById('errorMsg').textContent = 'Сервертэй холбогдоход алдаа гарлаа.';
+                showModalStep('errorStep');
+            }
+        });
+
+        document.getElementById('retryBtn').addEventListener('click', function() {
+            showModalStep('paymentStep');
+        });
+
         closeModalBtn.addEventListener('click', closeModal);
         modal.addEventListener('click', function(e) {
-            if(e.target === modal) { closeModal(); }
+            if (e.target === modal) { closeModal(); }
         });
     </script>
 </body>
