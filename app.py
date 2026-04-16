@@ -41,6 +41,28 @@ def home():
     return render_template('index.html')
 
 
+@app.route('/api/debug')
+def debug():
+    import sys
+    results = {}
+    results['python'] = sys.version
+    results['SPREADSHEET_ID'] = os.environ.get('SPREADSHEET_ID', 'NOT SET')
+    results['SHEET_NAME'] = os.environ.get('SHEET_NAME', 'NOT SET')
+    creds_json = os.environ.get('GOOGLE_CREDENTIALS_JSON', '')
+    results['CREDENTIALS'] = 'SET' if creds_json else 'NOT SET'
+    try:
+        import gspread
+        results['gspread'] = gspread.__version__
+    except Exception as e:
+        results['gspread'] = f'ERROR: {e}'
+    try:
+        sheet = get_sheet()
+        results['sheet'] = f'OK: {sheet.title}'
+    except Exception as e:
+        results['sheet_error'] = str(e)
+    return jsonify(results)
+
+
 @app.route('/api/register', methods=['POST'])
 def register():
     data = request.get_json()
