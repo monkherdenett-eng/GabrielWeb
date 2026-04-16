@@ -3,6 +3,7 @@ import gspread
 from datetime import datetime
 import json
 import os
+import base64
 
 app = Flask(__name__)
 
@@ -18,12 +19,9 @@ HEADERS = ['Овог Нэр', 'Утасны дугаар', 'Имэйл', 'Бүр
 
 
 def get_sheet():
-    creds_json = os.environ.get('GOOGLE_CREDENTIALS_JSON', '')
-    if creds_json:
-        creds_dict = json.loads(creds_json)
-        # Fix newlines in private key if escaped
-        if 'private_key' in creds_dict:
-            creds_dict['private_key'] = creds_dict['private_key'].replace('\\n', '\n')
+    creds_b64 = os.environ.get('GOOGLE_CREDENTIALS_B64', '')
+    if creds_b64:
+        creds_dict = json.loads(base64.b64decode(creds_b64).decode('utf-8'))
         client = gspread.service_account_from_dict(creds_dict)
     else:
         client = gspread.service_account(filename='credentials.json')
