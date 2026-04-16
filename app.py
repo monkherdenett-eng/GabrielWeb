@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify
 import gspread
-from google.oauth2.service_account import Credentials
 from datetime import datetime
 import json
 import os
@@ -22,14 +21,16 @@ def get_sheet():
     creds_json = os.environ.get('GOOGLE_CREDENTIALS_JSON', '')
     if creds_json:
         creds_dict = json.loads(creds_json)
-        creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
+        # Fix newlines in private key if escaped
+        if 'private_key' in creds_dict:
+            creds_dict['private_key'] = creds_dict['private_key'].replace('\\n', '\n')
+        client = gspread.service_account_from_dict(creds_dict)
     else:
-        creds = Credentials.from_service_account_file('credentials.json', scopes=SCOPES)
-    client = gspread.authorize(creds)
+        client = gspread.service_account(filename='credentials.json')
     spreadsheet = client.open_by_key(SPREADSHEET_ID)
     try:
         sheet = spreadsheet.worksheet(SHEET_NAME)
-    except gspread.WorksheetNotFound:
+    except gspread.exceptions.WorksheetNotFound:
         sheet = spreadsheet.add_worksheet(title=SHEET_NAME, rows=1000, cols=10)
         sheet.append_row(HEADERS)
     return sheet
