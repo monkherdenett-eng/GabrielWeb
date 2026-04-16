@@ -71,7 +71,7 @@ def save_registration():
         return jsonify({'success': True})
     except Exception as e:
         app.logger.error(f'Google Sheets error: {e}')
-        return jsonify({'success': False, 'error': 'Хадгалахад алдаа гарлаа'}), 500
+        return jsonify({'success': False, 'error': str(e)}), 500
 
 
 if __name__ == '__main__':
