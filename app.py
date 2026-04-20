@@ -4,6 +4,7 @@ from datetime import datetime
 import json
 import os
 import base64
+import requests as http
 
 app = Flask(__name__)
 
@@ -14,8 +15,19 @@ SCOPES = [
 
 SPREADSHEET_ID = os.environ.get('SPREADSHEET_ID', '')
 SHEET_NAME = os.environ.get('SHEET_NAME', 'Бүртгэл')
-
 HEADERS = ['Овог Нэр', 'Утасны дугаар', 'Имэйл', 'Бүртгүүлсэн огноо', 'Төлбөрийн арга', 'Төлбөрийн төлөв']
+
+BYL_TOKEN = os.environ.get('BYL_TOKEN', '')
+BYL_PROJECT_ID = os.environ.get('BYL_PROJECT_ID', '547')
+BYL_BASE = 'https://byl.mn/api/v1'
+
+
+def byl_headers():
+    return {
+        'Authorization': f'Bearer {BYL_TOKEN}',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
 
 
 def get_sheet():
@@ -34,43 +46,77 @@ def get_sheet():
     return sheet
 
 
+def save_to_sheet(full_name, phone, email, method='byl.mn'):
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    row = [full_name, phone, email, now, method, 'Төлөгдсөн']
+    sheet = get_sheet()
+    sheet.append_row(row)
+
+
 @app.route('/')
 def home():
     return render_template('index.html')
 
 
-@app.route('/api/debug')
-def debug():
-    import sys
-    results = {}
-    results['python'] = sys.version
-    results['SPREADSHEET_ID'] = os.environ.get('SPREADSHEET_ID', 'NOT SET')
-    results['SHEET_NAME'] = os.environ.get('SHEET_NAME', 'NOT SET')
-    creds_json = os.environ.get('GOOGLE_CREDENTIALS_JSON', '')
-    results['CREDENTIALS'] = 'SET' if creds_json else 'NOT SET'
-    try:
-        import gspread
-        results['gspread'] = gspread.__version__
-    except Exception as e:
-        results['gspread'] = f'ERROR: {e}'
-    try:
-        sheet = get_sheet()
-        results['sheet'] = f'OK: {sheet.title}'
-    except Exception as e:
-        results['sheet_error'] = str(e)
-    return jsonify(results)
-
-
-@app.route('/api/register', methods=['POST'])
-def register():
+@app.route('/api/create-invoice', methods=['POST'])
+def create_invoice():
     data = request.get_json()
     full_name = (data.get('fullName') or '').strip()
     phone = (data.get('phone') or '').strip()
+    email = (data.get('email') or '').strip()
 
     if not full_name or not phone:
         return jsonify({'success': False, 'error': 'Овог нэр болон утасны дугаар шаардлагатай'}), 400
 
-    return jsonify({'success': True})
+    try:
+        resp = http.post(
+            f'{BYL_BASE}/projects/{BYL_PROJECT_ID}/invoices',
+            json={
+                'amount': 25000,
+                'description': f'Семинарын бүртгэл - {full_name} ({phone})'
+            },
+            headers=byl_headers(),
+            timeout=10
+        )
+        result = resp.json()
+        if resp.status_code in (200, 201):
+            return jsonify({'success': True, 'invoice': result})
+        else:
+            return jsonify({'success': False, 'error': str(result)}), 500
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/check-invoice/<invoice_id>', methods=['GET'])
+def check_invoice(invoice_id):
+    try:
+        resp = http.get(
+            f'{BYL_BASE}/projects/{BYL_PROJECT_ID}/invoices/{invoice_id}',
+            headers=byl_headers(),
+            timeout=10
+        )
+        result = resp.json()
+        return jsonify({'success': True, 'invoice': result})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/webhook/byl', methods=['POST'])
+def byl_webhook():
+    data = request.get_json(silent=True) or {}
+    app.logger.info(f'byl webhook: {data}')
+    # Төлбөр амжилттай бол Google Sheets-т хадгалах
+    status = data.get('status') or data.get('payment_status') or ''
+    if status in ('paid', 'success', 'completed', 'PAID', 'SUCCESS'):
+        meta = data.get('description', '')
+        full_name = data.get('full_name', meta)
+        phone = data.get('phone', '')
+        email = data.get('email', '')
+        try:
+            save_to_sheet(full_name, phone, email, 'byl.mn')
+        except Exception as e:
+            app.logger.error(f'Sheet error on webhook: {e}')
+    return jsonify({'success': True}), 200
 
 
 @app.route('/api/save-registration', methods=['POST'])
@@ -83,12 +129,8 @@ def save_registration():
     if not full_name or not phone:
         return jsonify({'success': False, 'error': 'Мэдээлэл дутуу байна'}), 400
 
-    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    row = [full_name, phone, email, now, 'QPay', 'Төлөгдсөн']
-
     try:
-        sheet = get_sheet()
-        sheet.append_row(row)
+        save_to_sheet(full_name, phone, email, 'byl.mn')
         return jsonify({'success': True})
     except Exception as e:
         app.logger.error(f'Google Sheets error: {e}')

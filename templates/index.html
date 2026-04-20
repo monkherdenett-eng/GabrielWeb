@@ -482,58 +482,75 @@
         }
     </script>
 
-    <!-- QPay Modal -->
+    <!-- Payment Modal -->
     <div id="qpayModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300 bg-black/80 backdrop-blur-sm" style="display:none;">
-        <div class="bg-steel-800 w-full max-w-md rounded-2xl border border-gray-700 shadow-2xl transform scale-95 transition-transform duration-300 p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto">
-            <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <div class="bg-steel-800 w-full max-w-md rounded-2xl border border-gray-700 shadow-2xl transform scale-95 transition-transform duration-300 p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto discord-scroll">
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
-            <!-- Payment step -->
-            <div id="paymentStep">
-                <div class="text-center mb-6">
-                    <h3 class="text-2xl font-bold text-white mb-2">Төлбөр төлөх</h3>
-                    <p class="text-gray-400">Та доорх QR кодыг уншуулж төлбөрөө төлнө үү.</p>
+
+            <!-- Loading: invoice үүсгэж байна -->
+            <div id="loadingStep" class="text-center py-10">
+                <div class="w-16 h-16 border-4 border-neon-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p class="text-white font-semibold">Нэхэмжлэл үүсгэж байна...</p>
+            </div>
+
+            <!-- Payment: QR + bank buttons -->
+            <div id="paymentStep" class="hidden">
+                <div class="text-center mb-4">
+                    <h3 class="text-xl font-bold text-white mb-1">Төлбөр төлөх</h3>
+                    <p class="text-gray-400 text-sm">QR уншуулах эсвэл банкны апп сонгоно уу</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl flex justify-center mb-6">
-                    <img src="https://via.placeholder.com/250x250.png?text=Таны+QPay+QR+Код+Энд+Байрлана" alt="QPay QR Code" class="w-64 h-64 object-contain">
+
+                <!-- QR код -->
+                <div class="bg-white p-3 rounded-xl flex justify-center mb-4">
+                    <img id="qrImage" src="" alt="QR Code" class="w-56 h-56 object-contain">
                 </div>
-                <div class="bg-steel-900 rounded-lg p-4 mb-6 border border-gray-700 text-center">
-                    <p class="text-sm text-gray-400 mb-1">Төлөх дүн:</p>
+
+                <!-- Дүн -->
+                <div class="bg-steel-900 rounded-lg p-3 mb-4 border border-gray-700 text-center">
+                    <p class="text-xs text-gray-400 mb-0.5">Төлөх дүн</p>
                     <p class="text-2xl font-bold text-neon-500">25,000₮</p>
                 </div>
-                <div class="bg-yellow-500/10 border border-yellow-500/50 rounded-lg p-4 mb-6 text-center">
-                    <p class="text-yellow-500 text-sm font-medium">
-                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Маш чухал: Гүйлгээний утга дээр та <span class="font-bold underline" id="displayPhone">УТАСНЫ ДУГААРАА</span> заавал бичнэ үү!
+
+                <!-- Банкны аппууд -->
+                <p class="text-xs text-gray-400 text-center mb-3">Банкны апп-аар шууд төлөх</p>
+                <div id="bankButtons" class="grid grid-cols-3 gap-2 mb-4">
+                    <!-- JS-ээр дүүргэгдэнэ -->
+                </div>
+
+                <!-- Checkout хуудас -->
+                <a id="checkoutLink" href="#" target="_blank"
+                   class="w-full bg-neon-500 hover:bg-neon-600 text-white font-bold py-3 rounded-md transition-all flex justify-center items-center gap-2 mb-3">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Төлбөрийн хуудас нээх
+                </a>
+
+                <!-- Polling статус -->
+                <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 text-center">
+                    <p class="text-yellow-400 text-xs">
+                        <i class="fa-solid fa-circle-notch fa-spin mr-1"></i>
+                        Төлбөр хийгдэхийг хүлээж байна...
                     </p>
                 </div>
-                <button id="confirmPaymentBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-md transition-all flex justify-center items-center gap-2">
-                    <i class="fa-solid fa-circle-check"></i> Би төлбөрөө төлсөн
-                </button>
-                <p class="text-center text-xs text-gray-500 mt-4">
-                    QPay-ээр төлбөрөө гүйцэтгэсний дараа дээрх товчийг дарна уу.
-                </p>
             </div>
-            <!-- Saving step -->
-            <div id="savingStep" class="hidden text-center py-8">
-                <div class="w-16 h-16 border-4 border-neon-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                <p class="text-white font-semibold">Бүртгэл хадгалж байна...</p>
-            </div>
-            <!-- Success step -->
+
+            <!-- Success -->
             <div id="successStep" class="hidden text-center py-6">
                 <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                     <i class="fa-solid fa-circle-check text-green-400 text-4xl"></i>
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-2">Бүртгэл амжилттай!</h3>
-                <p class="text-gray-400 mb-4">Таны бүртгэл баталгаажлаа. Бид тантай удахгүй холбогдох болно.</p>
-                <div id="confirmedName" class="bg-steel-900 rounded-lg p-4 border border-gray-700 text-left mb-6">
+                <p class="text-gray-400 mb-4">Төлбөр хүлээн авлаа. Бид тантай удахгүй холбогдох болно.</p>
+                <div class="bg-steel-900 rounded-lg p-4 border border-gray-700 text-left mb-6">
                     <p class="text-sm text-gray-400">Нэр: <span id="successName" class="text-white font-semibold"></span></p>
-                    <p class="text-sm text-gray-400">Утас: <span id="successPhone" class="text-white font-semibold"></span></p>
+                    <p class="text-sm text-gray-400 mt-1">Утас: <span id="successPhone" class="text-white font-semibold"></span></p>
                 </div>
                 <button onclick="closeModal()" class="w-full bg-neon-500 hover:bg-neon-600 text-white font-bold py-3 rounded-md transition-all">
                     Хаах
                 </button>
             </div>
-            <!-- Error step -->
+
+            <!-- Error -->
             <div id="errorStep" class="hidden text-center py-6">
                 <div class="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                     <i class="fa-solid fa-circle-xmark text-red-400 text-4xl"></i>
@@ -569,14 +586,25 @@
     <script>
         const form = document.getElementById('registrationForm');
         const modal = document.getElementById('qpayModal');
-        const closeModalBtn = document.getElementById('closeModal');
-        const phoneInput = document.getElementById('phone');
-        const displayPhone = document.getElementById('displayPhone');
 
         let currentRegistration = {};
+        let currentInvoiceId = null;
+        let pollInterval = null;
+
+        const BANKS = [
+            { name: 'Хаан банк',    color: '#004A97', icon: '🏦', scheme: 'khanbank' },
+            { name: 'Голомт',       color: '#E31837', icon: '🏦', scheme: 'golomtbank' },
+            { name: 'Хас банк',     color: '#F37021', icon: '🏦', scheme: 'xacbank' },
+            { name: 'ТДБ',          color: '#00539B', icon: '🏦', scheme: 'tdbbank' },
+            { name: 'Төрийн банк',  color: '#00A651', icon: '🏦', scheme: 'statebank' },
+            { name: 'Капитал',      color: '#8B1A4A', icon: '🏦', scheme: 'capitalbank' },
+            { name: 'Ариг',         color: '#005BAA', icon: '🏦', scheme: 'arigbank' },
+            { name: 'Өчирт',        color: '#7B2D8B', icon: '🏦', scheme: 'ochinbank' },
+            { name: 'Чингис',       color: '#C8102E', icon: '🏦', scheme: 'chingisbank' },
+        ];
 
         function showModalStep(stepId) {
-            ['paymentStep', 'savingStep', 'successStep', 'errorStep'].forEach(id => {
+            ['loadingStep','paymentStep','successStep','errorStep'].forEach(id => {
                 document.getElementById(id).classList.add('hidden');
             });
             document.getElementById(stepId).classList.remove('hidden');
@@ -592,13 +620,66 @@
         }
 
         function closeModal() {
+            stopPolling();
             modal.classList.add('opacity-0');
             modal.firstElementChild.classList.remove('scale-100');
             modal.firstElementChild.classList.add('scale-95');
             setTimeout(() => {
                 modal.style.display = 'none';
-                showModalStep('paymentStep');
+                showModalStep('loadingStep');
             }, 300);
+        }
+
+        function stopPolling() {
+            if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+        }
+
+        function renderBankButtons(checkoutUrl) {
+            const container = document.getElementById('bankButtons');
+            container.innerHTML = '';
+            BANKS.forEach(bank => {
+                const btn = document.createElement('a');
+                btn.href = checkoutUrl || '#';
+                btn.target = '_blank';
+                btn.className = 'flex flex-col items-center justify-center gap-1 bg-steel-900 hover:bg-gray-700 border border-gray-700 rounded-xl p-3 transition-colors text-center';
+                btn.innerHTML = `<span class="text-2xl">${bank.icon}</span><span class="text-xs text-gray-300 leading-tight">${bank.name}</span>`;
+                container.appendChild(btn);
+            });
+        }
+
+        async function startPolling(invoiceId) {
+            stopPolling();
+            pollInterval = setInterval(async () => {
+                try {
+                    const res = await fetch(`/api/check-invoice/${invoiceId}`);
+                    const data = await res.json();
+                    if (!data.success) return;
+                    const inv = data.invoice;
+                    const status = (inv.status || inv.payment_status || '').toLowerCase();
+                    if (['paid','success','completed'].includes(status)) {
+                        stopPolling();
+                        await saveToSheet();
+                    }
+                } catch {}
+            }, 3000);
+        }
+
+        async function saveToSheet() {
+            try {
+                const res = await fetch('/api/save-registration', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(currentRegistration)
+                });
+                const result = await res.json();
+                document.getElementById('successName').textContent = currentRegistration.fullName;
+                document.getElementById('successPhone').textContent = currentRegistration.phone;
+                showModalStep('successStep');
+                form.reset();
+            } catch {
+                showModalStep('successStep');
+                form.reset();
+            }
         }
 
         form.addEventListener('submit', async function(e) {
@@ -613,59 +694,55 @@
                 email: document.getElementById('email').value.trim()
             };
 
+            showModalStep('loadingStep');
+            openModal();
+
             try {
-                const res = await fetch('/api/register', {
+                const res = await fetch('/api/create-invoice', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(currentRegistration)
                 });
                 const result = await res.json();
+
                 if (result.success) {
-                    displayPhone.innerText = currentRegistration.phone + " гэж";
+                    const inv = result.invoice;
+                    currentInvoiceId = inv.id || inv.invoice_id || inv.uuid || null;
+
+                    // Checkout URL
+                    const checkoutUrl = inv.checkout_url || inv.payment_url || inv.url || '';
+                    if (checkoutUrl) {
+                        document.getElementById('checkoutLink').href = checkoutUrl;
+                        // QR код үүсгэх
+                        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(checkoutUrl)}`;
+                        document.getElementById('qrImage').src = qrUrl;
+                    }
+
+                    renderBankButtons(checkoutUrl);
                     showModalStep('paymentStep');
-                    openModal();
+
+                    // Polling эхлүүлэх
+                    if (currentInvoiceId) startPolling(currentInvoiceId);
                 } else {
-                    alert(result.error || 'Алдаа гарлаа. Дахин оролдоно уу.');
+                    document.getElementById('errorMsg').textContent = result.error || 'Нэхэмжлэл үүсгэхэд алдаа гарлаа.';
+                    showModalStep('errorStep');
                 }
-            } catch {
-                alert('Сервертэй холбогдоход алдаа гарлаа.');
+            } catch (err) {
+                document.getElementById('errorMsg').textContent = 'Сервертэй холбогдоход алдаа гарлаа.';
+                showModalStep('errorStep');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fa-solid fa-qrcode"></i> QPay-ээр төлөх';
             }
         });
 
-        document.getElementById('confirmPaymentBtn').addEventListener('click', async function() {
-            showModalStep('savingStep');
-            try {
-                const res = await fetch('/api/save-registration', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(currentRegistration)
-                });
-                const result = await res.json();
-                if (result.success) {
-                    document.getElementById('successName').textContent = currentRegistration.fullName;
-                    document.getElementById('successPhone').textContent = currentRegistration.phone;
-                    showModalStep('successStep');
-                    form.reset();
-                } else {
-                    document.getElementById('errorMsg').textContent = result.error || 'Хадгалахад алдаа гарлаа.';
-                    showModalStep('errorStep');
-                }
-            } catch {
-                document.getElementById('errorMsg').textContent = 'Сервертэй холбогдоход алдаа гарлаа.';
-                showModalStep('errorStep');
-            }
-        });
-
         document.getElementById('retryBtn').addEventListener('click', function() {
-            showModalStep('paymentStep');
+            closeModal();
         });
 
-        closeModalBtn.addEventListener('click', closeModal);
+        document.getElementById('closeModal').addEventListener('click', closeModal);
         modal.addEventListener('click', function(e) {
-            if (e.target === modal) { closeModal(); }
+            if (e.target === modal) closeModal();
         });
     </script>
 </body>
