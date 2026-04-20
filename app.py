@@ -19,18 +19,24 @@ SPREADSHEET_ID = os.environ.get('SPREADSHEET_ID', '')
 SHEET_NAME = os.environ.get('SHEET_NAME', 'Бүртгэл')
 HEADERS = ['Овог Нэр', 'Утасны дугаар', 'Имэйл', 'Бүртгүүлсэн огноо', 'Төлбөрийн арга', 'Төлбөрийн төлөв']
 
-BYL_TOKEN = os.environ.get('BYL_TOKEN', '')
-BYL_PROJECT_ID = os.environ.get('BYL_PROJECT_ID', '547')
-BYL_PRICE_ID = os.environ.get('BYL_PRICE_ID', '1555')
 BYL_BASE = 'https://byl.mn/api/v1'
 
 
 def byl_headers():
+    token = os.environ.get('BYL_TOKEN', '')
     return {
-        'Authorization': f'Bearer {BYL_TOKEN}',
+        'Authorization': f'Bearer {token}',
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     }
+
+
+def byl_project():
+    return os.environ.get('BYL_PROJECT_ID', '547')
+
+
+def byl_price():
+    return os.environ.get('BYL_PRICE_ID', '1555')
 
 
 def get_sheet():
@@ -61,6 +67,25 @@ def home():
     return render_template('index.html')
 
 
+@app.route('/api/debug')
+def debug():
+    token = os.environ.get('BYL_TOKEN', '')
+    results = {
+        'BYL_TOKEN': f'SET ({len(token)} chars)' if token else 'NOT SET',
+        'BYL_PROJECT_ID': os.environ.get('BYL_PROJECT_ID', 'NOT SET'),
+        'BYL_PRICE_ID': os.environ.get('BYL_PRICE_ID', 'NOT SET'),
+        'SPREADSHEET_ID': os.environ.get('SPREADSHEET_ID', 'NOT SET'),
+        'GOOGLE_CREDENTIALS_B64': 'SET' if os.environ.get('GOOGLE_CREDENTIALS_B64') else 'NOT SET',
+    }
+    try:
+        r = http.get(f'{BYL_BASE}/projects/{byl_project()}',
+                     headers=byl_headers(), timeout=5)
+        results['byl_api'] = f'{r.status_code}: {r.text[:150]}'
+    except Exception as e:
+        results['byl_api_error'] = str(e)
+    return jsonify(results)
+
+
 @app.route('/api/create-invoice', methods=['POST'])
 def create_invoice():
     data = request.get_json()
@@ -73,9 +98,9 @@ def create_invoice():
 
     try:
         resp = http.post(
-            f'{BYL_BASE}/projects/{BYL_PROJECT_ID}/checkouts',
+            f'{BYL_BASE}/projects/{byl_project()}/checkouts',
             json={
-                'price': BYL_PRICE_ID,
+                'price': byl_price(),
                 'quantity': 1,
                 'customer_name': full_name,
                 'customer_phone': phone,
@@ -98,7 +123,7 @@ def create_invoice():
 def check_invoice(invoice_id):
     try:
         resp = http.get(
-            f'{BYL_BASE}/projects/{BYL_PROJECT_ID}/checkouts/{invoice_id}',
+            f'{BYL_BASE}/projects/{byl_project()}/checkouts/{invoice_id}',
             headers=byl_headers(),
             timeout=10
         )
