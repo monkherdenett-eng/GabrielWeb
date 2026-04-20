@@ -97,22 +97,24 @@ def create_invoice():
         return jsonify({'success': False, 'error': 'Овог нэр болон утасны дугаар шаардлагатай'}), 400
 
     try:
+        payload = {
+            'items': [{'price_id': byl_price(), 'quantity': 1}],
+            'customer_email': email,
+            'phone_number_collection': True,
+            'client_reference_id': phone,
+        }
         resp = http.post(
             f'{BYL_BASE}/projects/{byl_project()}/checkouts',
-            json={
-                'price': byl_price(),
-                'quantity': 1,
-                'customer_name': full_name,
-                'customer_phone': phone,
-                'customer_email': email,
-            },
+            json=payload,
             headers=byl_headers(),
             timeout=10
         )
         result = resp.json()
-        app.logger.info(f'byl.mn checkout response: {result}')
+        app.logger.info(f'byl.mn response {resp.status_code}: {result}')
         if resp.status_code in (200, 201):
-            return jsonify({'success': True, 'invoice': result})
+            # response: { data: { id, url, status, amount_total } }
+            data = result.get('data', result)
+            return jsonify({'success': True, 'invoice': data})
         else:
             return jsonify({'success': False, 'error': str(result)}), 500
     except Exception as e:

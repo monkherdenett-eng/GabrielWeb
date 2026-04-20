@@ -709,11 +709,10 @@
                     const inv = result.invoice;
                     currentInvoiceId = inv.id || inv.invoice_id || inv.uuid || null;
 
-                    // Checkout URL
-                    const checkoutUrl = inv.checkout_url || inv.payment_url || inv.url || '';
+                    // Checkout URL — byl.mn: data.url
+                    const checkoutUrl = inv.url || inv.checkout_url || inv.payment_url || '';
                     if (checkoutUrl) {
                         document.getElementById('checkoutLink').href = checkoutUrl;
-                        // QR код үүсгэх
                         const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(checkoutUrl)}`;
                         document.getElementById('qrImage').src = qrUrl;
                     }
