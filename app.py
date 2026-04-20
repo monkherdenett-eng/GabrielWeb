@@ -5,6 +5,8 @@ import json
 import os
 import base64
 import requests as http
+import hmac
+import hashlib
 
 app = Flask(__name__)
 
@@ -108,19 +110,28 @@ def check_invoice(invoice_id):
 
 @app.route('/api/webhook/byl', methods=['POST'])
 def byl_webhook():
+    secret = os.environ.get('BYL_WEBHOOK_SECRET', '')
+    if secret:
+        sig = request.headers.get('X-Byl-Signature') or request.headers.get('X-Signature') or ''
+        body = request.get_data()
+        expected = hmac.new(secret.encode(), body, hashlib.sha256).hexdigest()
+        if sig and not hmac.compare_digest(expected, sig):
+            return jsonify({'error': 'Invalid signature'}), 401
+
     data = request.get_json(silent=True) or {}
     app.logger.info(f'byl webhook: {data}')
-    # Төлбөр амжилттай бол Google Sheets-т хадгалах
-    status = data.get('status') or data.get('payment_status') or ''
-    if status in ('paid', 'success', 'completed', 'PAID', 'SUCCESS'):
-        meta = data.get('description', '')
-        full_name = data.get('full_name', meta)
-        phone = data.get('phone', '')
-        email = data.get('email', '')
+
+    status = (data.get('status') or data.get('payment_status') or '').lower()
+    if status in ('paid', 'success', 'completed'):
+        customer = data.get('customer') or {}
+        full_name = customer.get('name') or data.get('customer_name') or data.get('full_name', '')
+        phone = customer.get('phone') or data.get('customer_phone') or data.get('phone', '')
+        email = customer.get('email') or data.get('customer_email') or data.get('email', '')
         try:
             save_to_sheet(full_name, phone, email, 'byl.mn')
         except Exception as e:
             app.logger.error(f'Sheet error on webhook: {e}')
+
     return jsonify({'success': True}), 200
 
 
