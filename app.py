@@ -19,6 +19,7 @@ HEADERS = ['Овог Нэр', 'Утасны дугаар', 'Имэйл', 'Бүр
 
 BYL_TOKEN = os.environ.get('BYL_TOKEN', '')
 BYL_PROJECT_ID = os.environ.get('BYL_PROJECT_ID', '547')
+BYL_PRICE_ID = os.environ.get('BYL_PRICE_ID', '1555')
 BYL_BASE = 'https://byl.mn/api/v1'
 
 
@@ -70,15 +71,19 @@ def create_invoice():
 
     try:
         resp = http.post(
-            f'{BYL_BASE}/projects/{BYL_PROJECT_ID}/invoices',
+            f'{BYL_BASE}/projects/{BYL_PROJECT_ID}/checkouts',
             json={
-                'amount': 25000,
-                'description': f'Семинарын бүртгэл - {full_name} ({phone})'
+                'price': BYL_PRICE_ID,
+                'quantity': 1,
+                'customer_name': full_name,
+                'customer_phone': phone,
+                'customer_email': email,
             },
             headers=byl_headers(),
             timeout=10
         )
         result = resp.json()
+        app.logger.info(f'byl.mn checkout response: {result}')
         if resp.status_code in (200, 201):
             return jsonify({'success': True, 'invoice': result})
         else:
@@ -91,7 +96,7 @@ def create_invoice():
 def check_invoice(invoice_id):
     try:
         resp = http.get(
-            f'{BYL_BASE}/projects/{BYL_PROJECT_ID}/invoices/{invoice_id}',
+            f'{BYL_BASE}/projects/{BYL_PROJECT_ID}/checkouts/{invoice_id}',
             headers=byl_headers(),
             timeout=10
         )
