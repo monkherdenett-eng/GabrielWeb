@@ -67,6 +67,20 @@ def home():
     return render_template('index.html')
 
 
+@app.route('/payment-success')
+def payment_success():
+    from flask import request as req
+    full_name = req.args.get('name', '')
+    phone = req.args.get('phone', '')
+    email = req.args.get('email', '')
+    if full_name and phone:
+        try:
+            save_to_sheet(full_name, phone, email, 'byl.mn')
+        except Exception as e:
+            app.logger.error(f'Sheet error on success: {e}')
+    return render_template('success.html', name=full_name, phone=phone)
+
+
 @app.route('/api/debug')
 def debug():
     token = os.environ.get('BYL_TOKEN', '')
@@ -97,11 +111,20 @@ def create_invoice():
         return jsonify({'success': False, 'error': 'Овог нэр болон утасны дугаар шаардлагатай'}), 400
 
     try:
+        import urllib.parse
+        base_url = request.host_url.rstrip('/')
+        success_url = (
+            f"{base_url}/payment-success"
+            f"?name={urllib.parse.quote(full_name)}"
+            f"&phone={urllib.parse.quote(phone)}"
+            f"&email={urllib.parse.quote(email)}"
+        )
         payload = {
             'items': [{'price_id': byl_price(), 'quantity': 1}],
             'customer_email': email,
             'phone_number_collection': True,
             'client_reference_id': phone,
+            'success_url': success_url,
         }
         resp = http.post(
             f'{BYL_BASE}/projects/{byl_project()}/checkouts',
