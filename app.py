@@ -149,7 +149,7 @@ def byl_webhook():
     app.logger.info(f'byl webhook: {data}')
 
     status = (data.get('status') or data.get('payment_status') or '').lower()
-    if status in ('paid', 'success', 'completed'):
+    if status in ('paid', 'success', 'completed', 'complete'):
         customer = data.get('customer') or {}
         full_name = customer.get('name') or data.get('customer_name') or data.get('full_name', '')
         phone = customer.get('phone') or data.get('customer_phone') or data.get('phone', '')

@@ -656,7 +656,7 @@
                     if (!data.success) return;
                     const inv = data.invoice;
                     const status = (inv.status || inv.payment_status || '').toLowerCase();
-                    if (['paid','success','completed'].includes(status)) {
+                    if (['paid','success','completed','complete'].includes(status)) {
                         stopPolling();
                         await saveToSheet();
                     }
