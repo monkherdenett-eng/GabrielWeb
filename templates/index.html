@@ -513,12 +513,6 @@
                     <p class="text-2xl font-bold text-neon-500">25,000₮</p>
                 </div>
 
-                <!-- Банкны аппууд -->
-                <p class="text-xs text-gray-400 text-center mb-3">Банкны апп-аар шууд төлөх</p>
-                <div id="bankButtons" class="grid grid-cols-3 gap-2 mb-4">
-                    <!-- JS-ээр дүүргэгдэнэ -->
-                </div>
-
                 <!-- Checkout хуудас -->
                 <a id="checkoutLink" href="#" target="_blank"
                    class="w-full bg-neon-500 hover:bg-neon-600 text-white font-bold py-3 rounded-md transition-all flex justify-center items-center gap-2 mb-3">
@@ -591,18 +585,6 @@
         let currentInvoiceId = null;
         let pollInterval = null;
 
-        const BANKS = [
-            { name: 'Хаан банк',    color: '#004A97', icon: '🏦', scheme: 'khanbank' },
-            { name: 'Голомт',       color: '#E31837', icon: '🏦', scheme: 'golomtbank' },
-            { name: 'Хас банк',     color: '#F37021', icon: '🏦', scheme: 'xacbank' },
-            { name: 'ТДБ',          color: '#00539B', icon: '🏦', scheme: 'tdbbank' },
-            { name: 'Төрийн банк',  color: '#00A651', icon: '🏦', scheme: 'statebank' },
-            { name: 'Капитал',      color: '#8B1A4A', icon: '🏦', scheme: 'capitalbank' },
-            { name: 'Ариг',         color: '#005BAA', icon: '🏦', scheme: 'arigbank' },
-            { name: 'Өчирт',        color: '#7B2D8B', icon: '🏦', scheme: 'ochinbank' },
-            { name: 'Чингис',       color: '#C8102E', icon: '🏦', scheme: 'chingisbank' },
-        ];
-
         function showModalStep(stepId) {
             ['loadingStep','paymentStep','successStep','errorStep'].forEach(id => {
                 document.getElementById(id).classList.add('hidden');
@@ -632,19 +614,6 @@
 
         function stopPolling() {
             if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
-        }
-
-        function renderBankButtons(checkoutUrl) {
-            const container = document.getElementById('bankButtons');
-            container.innerHTML = '';
-            BANKS.forEach(bank => {
-                const btn = document.createElement('a');
-                btn.href = checkoutUrl || '#';
-                btn.target = '_blank';
-                btn.className = 'flex flex-col items-center justify-center gap-1 bg-steel-900 hover:bg-gray-700 border border-gray-700 rounded-xl p-3 transition-colors text-center';
-                btn.innerHTML = `<span class="text-2xl">${bank.icon}</span><span class="text-xs text-gray-300 leading-tight">${bank.name}</span>`;
-                container.appendChild(btn);
-            });
         }
 
         async function startPolling(invoiceId) {
@@ -717,7 +686,6 @@
                         document.getElementById('qrImage').src = qrUrl;
                     }
 
-                    renderBankButtons(checkoutUrl);
                     showModalStep('paymentStep');
 
                     // Polling эхлүүлэх
