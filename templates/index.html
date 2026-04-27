@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel Wavecounter | Семинар 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        steel: {
+                            800: '#1e2329',
+                            900: '#161a1e',
+                        },
+                        neon: {
+                            500: '#007AFF',
+                            600: '#005bb5',
+                        },
+                        discord: {
+                            bg: '#313338',
+                            dark: '#2B2D31',
+                            darker: '#1E1F22',
+                            text: '#DBDEE1',
+                            muted: '#949BA4'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            color: #ffffff;
+            background-color: #161a1e;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e2329; }
+        ::-webkit-scrollbar-thumb { background: #007AFF; }
+
+        .bg-image-wrapper {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -10;
+            overflow: hidden;
+        }
+        .bg-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.3);
+        }
+        /* iOS fixed background fix */
+        @supports (-webkit-touch-callout: none) {
+            .bg-image-wrapper {
+                position: fixed;
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
+        }
+
+        /* Discord custom scrollbar */
+        .discord-scroll::-webkit-scrollbar { width: 4px; }
+        .discord-scroll::-webkit-scrollbar-track { background: #2B2D31; }
+        .discord-scroll::-webkit-scrollbar-thumb { background: #1A1B1E; border-radius: 10px; }
+    </style>
+</head>
+<body class="antialiased font-sans">
+
+    <div class="bg-image-wrapper">
+        <img src="/static/images.jpg" alt="Background">
+    </div>
+
+    <nav class="fixed w-full z-50 bg-steel-900/70 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                    <img src="/static/459188839_122114027030459676_6481272640772000522_n.jpg" alt="Gabriel Trader Wavecounting" class="h-8 sm:h-14 flex-shrink-0">
+                    <span class="hidden sm:inline text-2xl font-bold tracking-tighter text-white">Gabriel Wavecounter</span>
+                    <span class="sm:hidden text-sm font-bold tracking-tighter text-white truncate">Gabriel Wavecounter</span>
+                </div>
+                <a href="#register" class="bg-neon-500 hover:bg-neon-600 text-white px-4 py-2 sm:px-6 rounded-md font-semibold text-sm sm:text-base transition-all shadow-[0_0_15px_rgba(0,122,255,0.3)]">
+                    Бүртгүүлэх
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="relative pt-24 pb-16 sm:pt-32 sm:pb-20 lg:pt-48 lg:pb-32 overflow-hidden text-center">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-block mb-4 px-4 py-1 rounded-full bg-steel-800/80 backdrop-blur-sm border border-gray-700 text-sm font-medium text-gray-300">
+                <i class="fa-solid fa-location-dot text-neon-500 mr-2"></i> Millennium Plaza (Бөхийн өргөөний ард)
+            </div>
+            <h1 class="text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-6 drop-shadow-lg">
+                Gabriel's <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-500 to-blue-300">Wavecounter</span>
+            </h1>
+            <p class="mt-4 max-w-2xl text-base sm:text-xl text-gray-300 mx-auto mb-10 drop-shadow-md">
+                Арилжаа, сэтгэл зүй, практик дасгал — бүгдийг нэг өдөрт. XM Broker-тэй хамтарсан цогц семинар.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#register" class="w-full sm:w-auto bg-neon-500 hover:bg-neon-600 text-white px-8 py-4 rounded-md font-bold text-lg transition-all shadow-[0_0_20px_rgba(0,122,255,0.4)]">
+                    Тасалбар авах (25,000₮)
+                </a>
+                <div class="text-gray-300 flex items-center gap-2 font-medium">
+                    <i class="fa-regular fa-calendar text-neon-500"></i>
+                    <span>2026.05.16 | 15:00–20:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-steel-800/80 backdrop-blur-md border-y border-gray-700 py-4">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-lg font-medium">
+                <span class="text-yellow-500"><i class="fa-solid fa-fire mr-2"></i>Анхаар:</span> Нийт <span class="font-bold text-white">250</span> суудалтай. Одоогоор цөөн суудал үлдлээ!
+            </p>
+        </div>
+    </div>
+
+    <!-- Countdown timer -->
+    <div class="py-8 bg-steel-900/80 backdrop-blur-sm border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm mb-3 uppercase tracking-widest">Семинар болох хүртэл</p>
+            <div class="flex justify-center gap-4 sm:gap-8">
+                <div class="text-center">
+                    <div id="cd-days" class="text-4xl sm:text-5xl font-extrabold text-white tabular-nums">00</div>
+                    <p class="text-gray-500 text-xs mt-1 uppercase tracking-wider">Өдөр</p>
+                </div>
+                <div class="text-4xl sm:text-5xl font-extrabold text-neon-500 leading-none">:</div>
+                <div class="text-center">
+                    <div id="cd-hours" class="text-4xl sm:text-5xl font-extrabold text-white tabular-nums">00</div>
+                    <p class="text-gray-500 text-xs mt-1 uppercase tracking-wider">Цаг</p>
+                </div>
+                <div class="text-4xl sm:text-5xl font-extrabold text-neon-500 leading-none">:</div>
+                <div class="text-center">
+                    <div id="cd-mins" class="text-4xl sm:text-5xl font-extrabold text-white tabular-nums">00</div>
+                    <p class="text-gray-500 text-xs mt-1 uppercase tracking-wider">Минут</p>
+                </div>
+                <div class="text-4xl sm:text-5xl font-extrabold text-neon-500 leading-none">:</div>
+                <div class="text-center">
+                    <div id="cd-secs" class="text-4xl sm:text-5xl font-extrabold text-white tabular-nums">00</div>
+                    <p class="text-gray-500 text-xs mt-1 uppercase tracking-wider">Секунд</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const target = new Date('2026-05-16T15:00:00+08:00').getTime();
+            function update() {
+                const now = Date.now();
+                const diff = target - now;
+                if (diff <= 0) {
+                    document.getElementById('cd-days').textContent = '00';
+                    document.getElementById('cd-hours').textContent = '00';
+                    document.getElementById('cd-mins').textContent = '00';
+                    document.getElementById('cd-secs').textContent = '00';
+                    return;
+                }
+                const d = Math.floor(diff / 86400000);
+                const h = Math.floor((diff % 86400000) / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
+                document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+                document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+                document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+                document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+            }
+            update();
+            setInterval(update, 1000);
+        })();
+    </script>
+
+    <!-- Онцлог мэдээлэл -->
+    <div class="py-12 bg-steel-900/60 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-steel-800/80 rounded-xl p-5 border border-gray-700 text-center">
+                    <i class="fa-solid fa-users text-neon-500 text-2xl mb-2"></i>
+                    <p class="text-2xl font-extrabold text-white">250</p>
+                    <p class="text-gray-400 text-sm">Суудал</p>
+                </div>
+                <div class="bg-steel-800/80 rounded-xl p-5 border border-gray-700 text-center">
+                    <img src="/static/Blog-Banner-28-768x432.jpg" alt="XM" class="h-7 object-contain mx-auto mb-2">
+                    <p class="text-2xl font-extrabold text-white">XM</p>
+                    <p class="text-gray-400 text-sm">Хамтрагч брокер</p>
+                </div>
+                <div class="bg-steel-800/80 rounded-xl p-5 border border-gray-700 text-center">
+                    <i class="fa-solid fa-clock text-neon-500 text-2xl mb-2"></i>
+                    <p class="text-2xl font-extrabold text-white">5 цаг</p>
+                    <p class="text-gray-400 text-sm">15:00 – 20:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Багшийн танилцуулга -->
+    <div class="py-16 sm:py-20 bg-steel-800/50 backdrop-blur-sm border-y border-gray-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-white">Багшийн тухай</h2>
+            </div>
+            <div class="flex flex-col md:flex-row items-center gap-10">
+                <div class="flex-shrink-0">
+                    <img src="/static/459188839_122114027030459676_6481272640772000522_n.jpg" alt="Gabriel" class="w-40 h-40 sm:w-52 sm:h-52 rounded-2xl object-cover border-2 border-neon-500 shadow-[0_0_30px_rgba(0,122,255,0.25)]">
+                </div>
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-extrabold text-white mb-1">Gabriel Wavecounter</h3>
+                    <p class="text-neon-500 font-semibold mb-4">Elliott Wave Analyst · Trader</p>
+                    <p class="text-gray-400 leading-relaxed mb-6">Форекс болон санхүүгийн зах зээлд Elliott Wave онолыг ашигласан арилжааны туршлагатай. Зах зээлийн долгионы бүтцийг задалж, тодорхой стратегиар арилжаа хийх арга барилаа оролцогчдод шилжүүлэх зорилготой. XM Broker-тэй хамтарч, трейдеруудыг дэмжих энэ семинарыг зохион байгуулж байна.</p>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                        <span class="px-4 py-1.5 rounded-full bg-steel-900 border border-gray-700 text-sm text-gray-300"><i class="fa-solid fa-chart-line text-neon-500 mr-2"></i>Elliott Wave</span>
+                        <span class="px-4 py-1.5 rounded-full bg-steel-900 border border-gray-700 text-sm text-gray-300"><i class="fa-solid fa-brain text-neon-500 mr-2"></i>Trading Psychology</span>
+                        <span class="px-4 py-1.5 rounded-full bg-steel-900 border border-gray-700 text-sm text-gray-300"><i class="fa-solid fa-crosshairs text-neon-500 mr-2"></i>Scalping Strategy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Хөтөлбөр -->
+    <div class="py-16 bg-steel-800/50 backdrop-blur-sm border-y border-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-white">Өдрийн хөтөлбөр</h2>
+                <p class="text-gray-400 mt-2">2026.05.16 — Millennium Plaza</p>
+            </div>
+            <div class="relative">
+                <!-- Timeline line -->
+                <div class="absolute left-6 sm:left-8 top-0 bottom-0 w-0.5 bg-gray-700"></div>
+                <div class="space-y-4">
+
+                    <div class="flex gap-4 sm:gap-6 items-start">
+                        <div class="relative flex-shrink-0 w-12 sm:w-16 flex justify-center">
+                            <div class="w-4 h-4 rounded-full bg-neon-500 mt-1 z-10 relative ring-4 ring-steel-900"></div>
+                        </div>
+                        <div class="bg-steel-900/80 rounded-xl p-4 flex-1 border border-gray-700">
+                            <span class="text-neon-500 font-bold text-sm">15:00</span>
+                            <h4 class="text-white font-semibold mt-0.5">Хаалга нээгдэнэ</h4>
+                            <p class="text-gray-400 text-sm mt-1">Оролцогчид бүртгүүлж, суудлаа эзэлнэ. Идэж уух зүйл боломжтой.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 sm:gap-6 items-start">
+                        <div class="relative flex-shrink-0 w-12 sm:w-16 flex justify-center">
+                            <div class="w-4 h-4 rounded-full bg-yellow-500 mt-1 z-10 relative ring-4 ring-steel-900"></div>
+                        </div>
+                        <div class="bg-steel-900/80 rounded-xl p-4 flex-1 border border-yellow-500/30">
+                            <span class="text-yellow-500 font-bold text-sm">17:00 – 17:30</span>
+                            <h4 class="text-white font-semibold mt-0.5">Нээлт <span class="text-yellow-500 text-xs font-normal ml-1">⚡ 20 минутын боломжоо ашигла!</span></h4>
+                            <p class="text-gray-400 text-sm mt-1">Семинарын нээлтийн ёслол. Эхний 20 минутыг сайн ашиглах нь таны өдрийг тодорхойлно.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 sm:gap-6 items-start">
+                        <div class="relative flex-shrink-0 w-12 sm:w-16 flex justify-center">
+                            <div class="w-4 h-4 rounded-full bg-neon-500 mt-1 z-10 relative ring-4 ring-steel-900"></div>
+                        </div>
+                        <div class="bg-steel-900/80 rounded-xl p-4 flex-1 border border-gray-700">
+                            <span class="text-neon-500 font-bold text-sm">17:30 – 18:10</span>
+                            <h4 class="text-white font-semibold mt-0.5">Брокерийн мэдээлэл</h4>
+                            <p class="text-gray-400 text-sm mt-1">Арилжаанд ашиглах брокеруудын талаарх дэлгэрэнгүй мэдээлэл, бүртгэлийн заавар.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 sm:gap-6 items-start">
+                        <div class="relative flex-shrink-0 w-12 sm:w-16 flex justify-center">
+                            <div class="w-4 h-4 rounded-full bg-white mt-1 z-10 relative ring-4 ring-steel-900"></div>
+                        </div>
+                        <div class="bg-steel-900/80 rounded-xl p-4 flex-1 border border-gray-700">
+                            <span class="text-gray-300 font-bold text-sm">18:20</span>
+                            <div class="flex items-center gap-2 mt-0.5">
+                                <img src="/static/Blog-Banner-28-768x432.jpg" alt="XM" class="h-4 object-contain">
+                                <h4 class="text-white font-semibold">XM Broker танилцуулга</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm mt-1">XM манай хамтрагч брокер бөгөөд зааланы төлбөрийг дэмждэг. XM-ийн давуу тал, данс нээх зааврыг танилцуулна.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 sm:gap-6 items-start">
+                        <div class="relative flex-shrink-0 w-12 sm:w-16 flex justify-center">
+                            <div class="w-4 h-4 rounded-full bg-neon-500 mt-1 z-10 relative ring-4 ring-steel-900"></div>
+                        </div>
+                        <div class="bg-steel-900/80 rounded-xl p-4 flex-1 border border-gray-700">
+                            <span class="text-neon-500 font-bold text-sm">18:30</span>
+                            <h4 class="text-white font-semibold mt-0.5">Ярилцлага</h4>
+                            <p class="text-gray-400 text-sm mt-1">Амьд ярилцлага, асуулт хариулт.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 sm:gap-6 items-start">
+                        <div class="relative flex-shrink-0 w-12 sm:w-16 flex justify-center">
+                            <div class="w-4 h-4 rounded-full bg-green-500 mt-1 z-10 relative ring-4 ring-steel-900"></div>
+                        </div>
+                        <div class="bg-steel-900/80 rounded-xl p-4 flex-1 border border-green-500/30">
+                            <span class="text-green-400 font-bold text-sm">19:00 – 20:00</span>
+                            <h4 class="text-white font-semibold mt-0.5">2 Семинар — 30 минут тус бүр</h4>
+                            <p class="text-gray-400 text-sm mt-1">Арилжаа болон сэтгэл зүйн сэдвээр 2 семинар дараалан явагдана. Практик дасгал хийлгэж, бодит жишээгээр зааж өгнө.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-20 bg-steel-900/80 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white drop-shadow-md">Семинараас та юу сурах вэ?</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <div class="bg-steel-800/90 backdrop-blur-md p-8 rounded-xl border border-gray-700 hover:border-neon-500 transition-colors shadow-xl">
+                    <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-chart-line text-2xl text-neon-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Wave Logic Суурь</h3>
+                    <p class="text-gray-400">Зах зээлийн хөдөлгөөнийг эмх замбараагүй биш, тодорхой долгионы давтамжаар харах логик сэтгэлгээ.</p>
+                </div>
+                <div class="bg-steel-800/90 backdrop-blur-md p-8 rounded-xl border border-gray-700 hover:border-neon-500 transition-colors shadow-xl">
+                    <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-shield-halved text-2xl text-neon-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Эрсдэлийн Удирдлага</h3>
+                    <p class="text-gray-400">Хөрөнгөө хэрхэн хамгаалах болон сэтгэл зүйгээ хэрхэн удирдах талаарх бодит туршлага.</p>
+                </div>
+                <div class="bg-steel-800/90 backdrop-blur-md p-8 rounded-xl border border-gray-700 hover:border-neon-500 transition-colors shadow-xl">
+                    <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-crosshairs text-2xl text-neon-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Практик Арилжаа</h3>
+                    <p class="text-gray-400">Онолыг бодит чарт дээр хэрхэн буулгах, арилжааны цэгүүдээ (Entry/Exit) хэрхэн тодорхойлох вэ.</p>
+                </div>
+                <div class="bg-steel-800/90 backdrop-blur-md p-8 rounded-xl border border-gray-700 hover:border-neon-500 transition-colors shadow-xl">
+                    <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-water text-2xl text-neon-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Elliott Wave Онол</h3>
+                    <p class="text-gray-400">Ralph Nelson Elliott-ийн зах зээлийн долгионы бүтэц, 5+3 импульс ба залруулгын хэв маягийг гүнзгий судлах.</p>
+                </div>
+                <div class="bg-steel-800/90 backdrop-blur-md p-8 rounded-xl border border-gray-700 hover:border-neon-500 transition-colors shadow-xl">
+                    <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-laptop-code text-2xl text-neon-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Амьд Арилжааны Үзүүлбэр</h3>
+                    <p class="text-gray-400">Бодит зах зээл дээр шууд арилжаа хийж үзүүлэх, стратегиа хэрхэн хэрэгжүүлэхийг нүдээр харах.</p>
+                </div>
+                <div class="bg-steel-800/90 backdrop-blur-md p-8 rounded-xl border border-gray-700 hover:border-neon-500 transition-colors shadow-xl">
+                    <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6">
+                        <img src="/static/Blog-Banner-28-768x432.jpg" alt="XM" class="w-[85%] h-[85%] object-contain rounded">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">XM Broker Танилцуулга</h3>
+                    <p class="text-gray-400">XM брокерийн бүртгэл, данс нээх, урамшуулал авах зааврууд болон арилжааны платформ ашиглах гарын авлага.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="register" class="py-16 sm:py-20 relative bg-steel-900/60 backdrop-blur-sm z-10">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-steel-800/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-700 overflow-hidden flex flex-col md:flex-row">
+                <div class="p-6 sm:p-10 md:w-5/12 bg-gray-900/80 flex flex-col justify-between border-b md:border-b-0 md:border-r border-gray-800">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">Бүртгэл баталгаажуулах</h3>
+                        <p class="text-gray-400 mb-8">Мэдээллээ үнэн зөв бөглөсний дараа төлбөрөө төлнө үү.</p>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <i class="fa-solid fa-calendar-check text-neon-500 mt-1 text-xl"></i>
+                                <div>
+                                    <h4 class="font-semibold">Хугацаа</h4>
+                                    <p class="text-gray-400 text-sm">2026.05.16 (Бямба гараг) · 15:00–20:00</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <i class="fa-solid fa-location-dot text-neon-500 mt-1 text-xl"></i>
+                                <div>
+                                    <h4 class="font-semibold">Байршил</h4>
+                                    <p class="text-gray-400 text-sm">Millennium Plaza, Бөхийн өргөөний ард</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <i class="fa-solid fa-ticket text-neon-500 mt-1 text-xl"></i>
+                                <div>
+                                    <h4 class="font-semibold">Тасалбарын үнэ</h4>
+                                    <p class="text-neon-500 font-bold text-lg">25,000₮</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 sm:p-10 md:w-7/12">
+                    <form id="registrationForm" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Овог, Нэр *</label>
+                            <input type="text" id="fullName" required class="w-full bg-steel-900/80 border border-gray-700 rounded-md px-4 py-3 text-white focus:outline-none focus:border-neon-500 focus:ring-1 focus:ring-neon-500 transition-colors" placeholder="Жишээ: Бат Дорж">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Утасны дугаар *</label>
+                            <input type="tel" id="phone" required class="w-full bg-steel-900/80 border border-gray-700 rounded-md px-4 py-3 text-white focus:outline-none focus:border-neon-500 focus:ring-1 focus:ring-neon-500 transition-colors" placeholder="Жишээ: 99112233">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Имэйл хаяг</label>
+                            <input type="email" id="email" class="w-full bg-steel-900/80 border border-gray-700 rounded-md px-4 py-3 text-white focus:outline-none focus:border-neon-500 focus:ring-1 focus:ring-neon-500 transition-colors" placeholder="Жишээ: bat@example.com">
+                        </div>
+                        <button type="submit" class="w-full bg-neon-500 hover:bg-neon-600 text-white font-bold py-4 rounded-md transition-all flex justify-center items-center gap-2">
+                            <i class="fa-solid fa-qrcode"></i> Төлбөр төлөх
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- FAQ -->
+    <div class="py-16 sm:py-20 bg-steel-800/50 backdrop-blur-sm border-t border-gray-800">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-white">Түгээмэл асуултууд</h2>
+            </div>
+            <div class="space-y-3" id="faq-list">
+                <div class="faq-item bg-steel-900/80 rounded-xl border border-gray-700 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left">
+                        <span class="font-semibold text-white">Анхан шатны хүн орж болох уу?</span>
+                        <i class="fa-solid fa-chevron-down text-neon-500 transition-transform duration-300 flex-shrink-0 ml-4"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-4 text-gray-400 text-sm leading-relaxed">
+                        Тийм, болно. Семинар нь арилжааны суурь ойлголтоос эхлэн ахисан түвшний Elliott Wave задлал хүртэл хамардаг тул дурын түвшний хүн хэрэгтэй мэдлэг авах боломжтой.
+                    </div>
+                </div>
+                <div class="faq-item bg-steel-900/80 rounded-xl border border-gray-700 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left">
+                        <span class="font-semibold text-white">XM данс заавал байх ёстой юу?</span>
+                        <i class="fa-solid fa-chevron-down text-neon-500 transition-transform duration-300 flex-shrink-0 ml-4"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-4 text-gray-400 text-sm leading-relaxed">
+                        Заавал биш. Гэхдээ XM бол манай хамтрагч брокер бөгөөд зааланы төлбөрийг дэмждэг. Семинарын дараа XM данс нээхэд туслах бүрэн заавар өгнө.
+                    </div>
+                </div>
+                <div class="faq-item bg-steel-900/80 rounded-xl border border-gray-700 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left">
+                        <span class="font-semibold text-white">Тасалбараа буцааж болох уу?</span>
+                        <i class="fa-solid fa-chevron-down text-neon-500 transition-transform duration-300 flex-shrink-0 ml-4"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-4 text-gray-400 text-sm leading-relaxed">
+                        Семинараас 3-аас дээш хоногийн өмнө мэдэгдвэл буцаан олгоно. Үүнээс бага хугацааны хувьд дараагийн арга хэмжээнд шилжүүлэх боломжтой.
+                    </div>
+                </div>
+                <div class="faq-item bg-steel-900/80 rounded-xl border border-gray-700 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left">
+                        <span class="font-semibold text-white">Семинарт бүртгүүлсний дараа юу болох вэ?</span>
+                        <i class="fa-solid fa-chevron-down text-neon-500 transition-transform duration-300 flex-shrink-0 ml-4"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-4 text-gray-400 text-sm leading-relaxed">
+                        Төлбөр амжилттай хийгдсэний дараа бид таны утасны дугаарт холбогдож суудлыг баталгаажуулна. Семинараас өмнө байршил болон хуваарийн мэдээллийг дахин илгээнэ.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleFaq(btn) {
+            const answer = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            const isOpen = !answer.classList.contains('hidden');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+            document.querySelectorAll('.faq-item i').forEach(i => i.style.transform = '');
+            if (!isOpen) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
+
+    <!-- Payment Modal -->
+    <div id="qpayModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300 bg-black/80 backdrop-blur-sm" style="display:none;">
+        <div class="bg-steel-800 w-full max-w-md rounded-2xl border border-gray-700 shadow-2xl transform scale-95 transition-transform duration-300 p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto discord-scroll">
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Loading: invoice үүсгэж байна -->
+            <div id="loadingStep" class="text-center py-10">
+                <div class="w-16 h-16 border-4 border-neon-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p class="text-white font-semibold">Нэхэмжлэл үүсгэж байна...</p>
+            </div>
+
+            <!-- Payment: QR + bank buttons -->
+            <div id="paymentStep" class="hidden">
+                <div class="text-center mb-4">
+                    <h3 class="text-xl font-bold text-white mb-1">Төлбөр төлөх</h3>
+                    <p class="text-gray-400 text-sm">QR уншуулах эсвэл банкны апп сонгоно уу</p>
+                </div>
+
+                <!-- QR код -->
+                <div class="bg-white p-3 rounded-xl flex justify-center mb-4">
+                    <div id="qrCode" class="w-56 h-56 flex items-center justify-center"></div>
+                </div>
+
+                <!-- Дүн -->
+                <div class="bg-steel-900 rounded-lg p-3 mb-4 border border-gray-700 text-center">
+                    <p class="text-xs text-gray-400 mb-0.5">Төлөх дүн</p>
+                    <p class="text-2xl font-bold text-neon-500">25,000₮</p>
+                </div>
+
+                <!-- Checkout хуудас -->
+                <a id="checkoutLink" href="#" target="_blank"
+                   class="w-full bg-neon-500 hover:bg-neon-600 text-white font-bold py-3 rounded-md transition-all flex justify-center items-center gap-2 mb-3">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Төлбөрийн хуудас нээх
+                </a>
+
+                <!-- Polling статус -->
+                <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 text-center">
+                    <p class="text-yellow-400 text-xs">
+                        <i class="fa-solid fa-circle-notch fa-spin mr-1"></i>
+                        Төлбөр хийгдэхийг хүлээж байна...
+                    </p>
+                </div>
+            </div>
+
+            <!-- Success -->
+            <div id="successStep" class="hidden text-center py-6">
+                <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa-solid fa-circle-check text-green-400 text-4xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">Бүртгэл амжилттай!</h3>
+                <p class="text-gray-400 mb-4">Төлбөр хүлээн авлаа. Бид тантай удахгүй холбогдох болно.</p>
+                <div class="bg-steel-900 rounded-lg p-4 border border-gray-700 text-left mb-6">
+                    <p class="text-sm text-gray-400">Нэр: <span id="successName" class="text-white font-semibold"></span></p>
+                    <p class="text-sm text-gray-400 mt-1">Утас: <span id="successPhone" class="text-white font-semibold"></span></p>
+                </div>
+                <button onclick="closeModal()" class="w-full bg-neon-500 hover:bg-neon-600 text-white font-bold py-3 rounded-md transition-all">
+                    Хаах
+                </button>
+            </div>
+
+            <!-- Error -->
+            <div id="errorStep" class="hidden text-center py-6">
+                <div class="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa-solid fa-circle-xmark text-red-400 text-4xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">Алдаа гарлаа</h3>
+                <p id="errorMsg" class="text-gray-400 mb-6">Дахин оролдоно уу.</p>
+                <button id="retryBtn" class="w-full bg-neon-500 hover:bg-neon-600 text-white font-bold py-3 rounded-md transition-all">
+                    Дахин оролдох
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-steel-900/90 backdrop-blur-md border-t border-gray-800 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0 text-center md:text-left">
+                    <h3 class="text-xl font-bold text-white mb-2">Gabriel Wavecounter</h3>
+                    <p class="text-gray-500 text-sm">© 2026 Gabriel Wavecounter. Бүх эрх хуулиар хамгаалагдсан.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://www.facebook.com/profile.php?id=61563790288323" target="_blank" class="text-gray-400 hover:text-[#1877F2] transition-colors">
+                        <i class="fa-brands fa-facebook text-2xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/gabriel.wavecounter/" target="_blank" class="text-gray-400 hover:text-[#E4405F] transition-colors">
+                        <i class="fa-brands fa-instagram text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const modal = document.getElementById('qpayModal');
+
+        let currentRegistration = {};
+        let currentInvoiceId = null;
+        let pollInterval = null;
+        let pollAttempts = 0;
+        const POLL_MAX_ATTEMPTS = 100; // ~5 минут (3с × 100)
+
+        function showModalStep(stepId) {
+            ['loadingStep','paymentStep','successStep','errorStep'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(stepId).classList.remove('hidden');
+        }
+
+        function openModal() {
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.firstElementChild.classList.remove('scale-95');
+                modal.firstElementChild.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            stopPolling();
+            modal.classList.add('opacity-0');
+            modal.firstElementChild.classList.remove('scale-100');
+            modal.firstElementChild.classList.add('scale-95');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                showModalStep('loadingStep');
+            }, 300);
+        }
+
+        function stopPolling() {
+            if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+            pollAttempts = 0;
+        }
+
+        async function startPolling(invoiceId) {
+            stopPolling();
+            pollAttempts = 0;
+            pollInterval = setInterval(async () => {
+                pollAttempts += 1;
+                if (pollAttempts > POLL_MAX_ATTEMPTS) {
+                    stopPolling();
+                    document.getElementById('errorMsg').textContent =
+                        'Төлбөрийн хугацаа дууссан байна. Хэрэв төлбөр төлсөн бол бид тантай удахгүй холбогдоно.';
+                    showModalStep('errorStep');
+                    return;
+                }
+                try {
+                    const res = await fetch(`/api/check-invoice/${invoiceId}`);
+                    const data = await res.json();
+                    if (!data.success) return;
+                    const inv = (data.invoice && data.invoice.data) || data.invoice || {};
+                    const status = (inv.status || inv.payment_status || '').toLowerCase();
+                    if (['paid','success','completed','complete'].includes(status)) {
+                        stopPolling();
+                        await saveToSheet();
+                    }
+                } catch {}
+            }, 3000);
+        }
+
+        async function saveToSheet() {
+            try {
+                const payload = Object.assign({}, currentRegistration, { invoiceId: currentInvoiceId });
+                await fetch('/api/save-registration', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch {}
+            document.getElementById('successName').textContent = currentRegistration.fullName;
+            document.getElementById('successPhone').textContent = currentRegistration.phone;
+            showModalStep('successStep');
+            form.reset();
+        }
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Уншиж байна...';
+
+            currentRegistration = {
+                fullName: document.getElementById('fullName').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                email: document.getElementById('email').value.trim()
+            };
+
+            showModalStep('loadingStep');
+            openModal();
+
+            try {
+                const res = await fetch('/api/create-invoice', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(currentRegistration)
+                });
+                const result = await res.json();
+
+                if (result.success) {
+                    const inv = result.invoice;
+                    currentInvoiceId = inv.id || inv.invoice_id || inv.uuid || null;
+
+                    // Checkout URL — byl.mn: data.url
+                    const checkoutUrl = inv.url || inv.checkout_url || inv.payment_url || '';
+                    if (checkoutUrl) {
+                        document.getElementById('checkoutLink').href = checkoutUrl;
+                        const qrContainer = document.getElementById('qrCode');
+                        qrContainer.innerHTML = '';
+                        new QRCode(qrContainer, {
+                            text: checkoutUrl,
+                            width: 224,
+                            height: 224,
+                            correctLevel: QRCode.CorrectLevel.M
+                        });
+                    }
+
+                    showModalStep('paymentStep');
+
+                    // Polling эхлүүлэх
+                    if (currentInvoiceId) startPolling(currentInvoiceId);
+                } else {
+                    document.getElementById('errorMsg').textContent = result.error || 'Нэхэмжлэл үүсгэхэд алдаа гарлаа.';
+                    showModalStep('errorStep');
+                }
+            } catch (err) {
+                document.getElementById('errorMsg').textContent = 'Сервертэй холбогдоход алдаа гарлаа.';
+                showModalStep('errorStep');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-qrcode"></i> Төлбөр төлөх';
+            }
+        });
+
+        document.getElementById('retryBtn').addEventListener('click', function() {
+            closeModal();
+        });
+
+        document.getElementById('closeModal').addEventListener('click', closeModal);
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+        });
+    </script>
+</body>
+</html>
